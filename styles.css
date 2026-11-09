@@ -39,8 +39,6 @@ p{margin:0;}
 .band--haze{background:var(--haze);}
 .band--smoke{background:var(--smoke);color:var(--paper);}
 .band--limo{background:var(--limo);color:var(--paper);}
-.vlt{position:absolute;top:0;right:max(20px,env(safe-area-inset-right,0px));transform:translateY(-50%);background:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:var(--r);color:var(--ink-2);}
-.band--smoke .vlt,.band--limo .vlt{border-color:var(--line-d);color:var(--paper-2);}
 .sec-head{display:grid;gap:var(--s-3);margin-bottom:var(--s-7);max-width:720px;}
 .eyebrow{color:var(--gold-ink);}
 .band--smoke .eyebrow,.band--limo .eyebrow{color:var(--gold);}

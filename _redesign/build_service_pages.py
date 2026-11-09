@@ -146,7 +146,6 @@ PAGES = [
 EXTRAS = {
     "law": """
 <section class="band band--haze" aria-labelledby="lawTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 50%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">Texas tint law</span>
@@ -170,7 +169,6 @@ EXTRAS = {
 """,
     "home_steps": """
 <section class="band band--haze" aria-labelledby="stepsTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 50%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">How it works</span>
@@ -186,7 +184,6 @@ EXTRAS = {
 """,
     "headliner_steps": """
 <section class="band band--haze" aria-labelledby="stepsTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 50%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">The process</span>
@@ -346,7 +343,6 @@ def build(page, parts):
 </section>
 
 <section class="band band--smoke" aria-labelledby="faqTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 20%</span>
   <div class="wrap faq-wrap">
     <div class="sec-head">
       <span class="mono eyebrow">FAQ</span>
@@ -359,7 +355,6 @@ def build(page, parts):
 </section>
 
 <section class="band band--limo closing" aria-labelledby="closeTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 5%</span>
   <div class="wrap">
     <h2 id="closeTitle">Ready when you are.</h2>
     <p>Tell us what you've got and we'll text you a quote.</p>
