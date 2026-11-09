@@ -178,7 +178,7 @@ p{margin:0;}
 .shot img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;transition:transform .4s ease;}
 .shot:hover img{transform:scale(1.03);}
 .shot--feat{grid-column:span 2;}
-.shot--feat img{aspect-ratio:1/1;}
+.shot--feat img{aspect-ratio:auto;} /* the featured photo shows uncropped */
 .shot figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:2px;padding:var(--s-6) var(--s-3) var(--s-3);background:linear-gradient(to top,rgba(14,15,16,.88),rgba(14,15,16,.6) 55%,transparent);color:var(--paper);font-size:14px;font-weight:500;line-height:1.3;}
 .shot figcaption .mono{font-size:11px;color:var(--gold);}
 .shot-tag{position:absolute;top:var(--s-2);left:var(--s-2);z-index:1;background:var(--paper);color:var(--ink);padding:4px 8px;border-radius:var(--r);font-size:11px;}
@@ -272,7 +272,7 @@ footer .wrap{display:grid;gap:var(--s-6);}
   .svc-grid{grid-template-columns:1fr 1fr;}
   .work-grid{grid-template-columns:repeat(3,1fr);}
   .shot--feat{grid-column:auto;grid-row:span 2;}
-  .shot--feat img{position:absolute;inset:0;height:100%;aspect-ratio:auto;}
+  .shot:not(.shot--feat) img{position:absolute;inset:0;height:100%;aspect-ratio:auto;} /* small tiles fill the rows the featured photo sets */
   .f-cols{grid-template-columns:repeat(3,1fr);}
 }
 @media (min-width:900px){
@@ -585,12 +585,12 @@ footer .wrap{display:grid;gap:var(--s-6);}
     <!-- Real job photos. To add or swap one, see the note in the CSS above .work-grid. -->
     <div class="work-grid">
       <figure class="shot shot--feat">
-        <img src="work/mustang-windshield-install.webp" alt="White classic Mustang in the shop with its windshield taped in place" width="701" height="1200" loading="lazy" style="object-position:50% 40%">
-        <figcaption><span class="mono">Glass</span>Windshield job on a classic Mustang</figcaption>
+        <img src="work/mustang-windshield-install.webp" alt="White classic Mustang in the shop with its new windshield taped in place" width="701" height="1200" loading="lazy">
+        <figcaption><span class="mono">Glass · in the shop</span>Windshield install on a classic Mustang</figcaption>
       </figure>
       <figure class="shot">
         <span class="shot-tag mono">Before</span>
-        <img src="work/broken-door-glass.webp" alt="Before: gray Toyota with the rear door glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 72%">
+        <img src="work/broken-door-glass.webp" alt="Before: gray Toyota with the rear door glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 86%">
         <figcaption><span class="mono">Glass · before</span>Busted rear door glass on a Toyota</figcaption>
       </figure>
       <figure class="shot">
