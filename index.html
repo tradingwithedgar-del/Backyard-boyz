@@ -136,6 +136,7 @@ p{margin:0;}
 .gw-hint svg{width:14px;height:14px;}
 .chips{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
 .chip{appearance:none;border:1.5px solid var(--line);background:var(--clear);border-radius:999px;min-height:48px;padding:6px 2px;cursor:pointer;font-family:var(--f-mono);font-weight:500;font-size:13px;color:var(--ink);display:grid;place-items:center;transition:border-color .15s,background-color .15s;}
+.chip i{display:block;width:22px;height:8px;border-radius:999px;border:1px solid var(--line);margin-bottom:3px;}
 .chip span{display:block;font-family:var(--f-body);font-size:11px;font-weight:500;color:var(--ink-2);line-height:1.1;}
 .chip:hover{border-color:var(--ink);}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--clear);}
@@ -406,6 +407,7 @@ footer .wrap{display:grid;gap:var(--s-6);}
                 <path d="M1331 250 L1421 250 L1431 387 L1341 390 Z"/>
                 <path d="M1461 245 L1565 244 L1582 380 L1471 384 Z"/>
               </clipPath>
+              <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
               <linearGradient id="clearGlass" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#C9D2D6"/><stop offset=".55" stop-color="#8E989D"/><stop offset="1" stop-color="#5F676C"/>
               </linearGradient>
@@ -415,8 +417,16 @@ footer .wrap{display:grid;gap:var(--s-6);}
             </defs>
             <image id="gwFrame" href="spin/g01.webp" width="2000" height="1125"/>
             <g id="gwGlass" clip-path="url(#glass)">
-              <rect id="glassClear" x="1150" y="240" width="440" height="160" fill="url(#clearGlass)" opacity=".25"/>
-              <rect id="glassTint" x="1150" y="240" width="440" height="160" fill="#050607" opacity=".45"/>
+              <g id="glassClear" opacity=".36">
+                <rect x="1150" y="240" width="440" height="160" fill="url(#clearGlass)"/>
+                <!-- seen through clear glass: headrests and seat backs -->
+                <g fill="#2E3438" filter="url(#soft)">
+                  <rect x="1212" y="292" width="44" height="44" rx="14"/><rect x="1200" y="338" width="70" height="60" rx="10"/>
+                  <rect x="1362" y="294" width="40" height="40" rx="13"/><rect x="1350" y="336" width="64" height="60" rx="10"/>
+                  <rect x="1470" y="330" width="120" height="8" fill="#454C51"/>
+                </g>
+              </g>
+              <rect id="glassTint" x="1150" y="240" width="440" height="160" fill="#050607" opacity=".25"/>
               <path d="M1150 400 L1250 240 L1300 240 L1200 400 Z M1320 400 L1420 240 L1440 240 L1340 400 Z M1450 400 L1550 240 L1600 240 L1500 400 Z" fill="url(#glare)"/>
             </g>
           </svg>
@@ -424,11 +434,11 @@ footer .wrap{display:grid;gap:var(--s-6);}
         <span class="gw-hint mono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M3 12h18"/></svg>Drag to spin 360°</span>
       </div>
       <div class="chips" role="group" aria-label="Tint shade">
-        <button type="button" class="chip" data-vlt="70" aria-pressed="false">70%<span>Barely</span></button>
-        <button type="button" class="chip" data-vlt="50" aria-pressed="false">50%<span>Light</span></button>
-        <button type="button" class="chip" data-vlt="35" aria-pressed="true">35%<span>Classic</span></button>
-        <button type="button" class="chip" data-vlt="20" aria-pressed="false">20%<span>Dark</span></button>
-        <button type="button" class="chip" data-vlt="5" aria-pressed="false">5%<span>Limo</span></button>
+        <button type="button" class="chip" data-vlt="70" aria-pressed="false"><i style="background:rgba(14,15,16,0.3)" aria-hidden="true"></i>70%<span>Barely</span></button>
+        <button type="button" class="chip" data-vlt="50" aria-pressed="false"><i style="background:rgba(14,15,16,0.5)" aria-hidden="true"></i>50%<span>Light</span></button>
+        <button type="button" class="chip" data-vlt="35" aria-pressed="true"><i style="background:rgba(14,15,16,0.65)" aria-hidden="true"></i>35%<span>Classic</span></button>
+        <button type="button" class="chip" data-vlt="20" aria-pressed="false"><i style="background:rgba(14,15,16,0.8)" aria-hidden="true"></i>20%<span>Dark</span></button>
+        <button type="button" class="chip" data-vlt="5" aria-pressed="false"><i style="background:rgba(14,15,16,0.95)" aria-hidden="true"></i>5%<span>Limo</span></button>
       </div>
       <div class="legal">
         <span class="tag tag--ok" id="legalTag" aria-live="polite">Legal on front windows</span>
@@ -788,6 +798,8 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 // ---------- shade picker ----------
 const tint = document.getElementById('glassTint');
 const clearGlass = document.getElementById('glassClear');
+// [clear-glass layer, dark film layer] opacity for each shade
+const SHADE_LOOK = {70:[.95,0], 50:[.66,.08], 35:[.36,.25], 20:[.2,.42], 5:[0,.92]};
 const read = document.getElementById('vltRead');
 const legalTag = document.getElementById('legalTag');
 const shadeQuote = document.getElementById('shadeQuote');
@@ -796,8 +808,10 @@ let currentVlt = 35;
 function setShade(vlt){
   currentVlt = vlt;
   // The render's glass is dark already, so lighter shades lay a clear-glass sheen on top and darker shades add black.
-  clearGlass.setAttribute('opacity', Math.max(0, (vlt - 5) / 65) * .6);
-  tint.setAttribute('opacity', (1 - vlt/100) * .75);
+  // Hand-tuned per shade so each step reads clearly on the render's already-dark glass.
+  const look = SHADE_LOOK[vlt] || SHADE_LOOK[35];
+  clearGlass.setAttribute('opacity', look[0]);
+  tint.setAttribute('opacity', look[1]);
   read.textContent = vlt + '%';
   const frontLegal = vlt >= 25; // Texas: front side windows must pass at least 25% of light
   legalTag.textContent = frontLegal ? 'Legal on front windows' : 'Back windows only';
