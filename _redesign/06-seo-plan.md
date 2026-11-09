@@ -21,6 +21,8 @@ Total: 6 queries and a handful of impressions. The site is **indexed** but has a
 
 ## Done on the branch (ships when the PR merges)
 
+- [x] Service area on every page (footer, homepage "Where we work", FAQ answers, structured data `areaServed`): Cypress, Houston, Katy, Jersey Village, Tomball, The Woodlands, Spring, Pasadena, Humble, Kingwood.
+
 - [x] Name is **Backyard Boyz Auto LLC** everywhere: title, nav, footer, social cards, privacy page, structured data.
 - [x] Title is now **"Window Tinting in Cypress & Houston, TX | Backyard Boyz Auto LLC"**, with the main keyword first and the city named.
 - [x] H1 now starts with **"Window tint…"**.
@@ -44,7 +46,7 @@ Total: 6 queries and a handful of impressions. The site is **indexed** but has a
 - [ ] **Primary category: "Window tinting service".** Secondary: "Auto glass shop", "Car accessories store" or "Auto upholsterer" (headliners). If the primary is "Auto repair shop", that explains the "auto repair near me" match.
 - [ ] **Website field:** `https://backyardboyzautollc.com/`, exactly.
 - [ ] **Name:** "Backyard Boyz Auto LLC", exactly as on the site. Don't add keywords to the name; Google suspends profiles for that.
-- [ ] **Service area:** Cypress, Houston, plus the nearby areas they actually drive to (Jersey Village, Tomball, Katy, Spring?), if true.
+- [ ] **Service area:** set the same list as the website: Cypress, Houston, Katy, Jersey Village, Tomball, The Woodlands, Spring, Pasadena, Humble, Kingwood.
 - [ ] **Hours:** if they really are 24 hours (a review says so), set it. If not, set real hours.
 - [ ] **Services list:** add each service with a one-line description.
 - [ ] **Photos:** upload the same job photos, plus new ones every week. Profiles with fresh photos get more clicks.

@@ -14,6 +14,10 @@ SITE = "https://backyardboyzautollc.com/"
 PHONE_TEL = "tel:+18328596786"
 PHONE = "(832) 859-6786"
 
+# Service area: shop in Cypress, mobile to the rest. Keep in sync with the homepage "Where we work" section.
+CITIES = ["Cypress", "Houston", "Katy", "Jersey Village", "Tomball", "The Woodlands", "Spring", "Pasadena", "Humble", "Kingwood"]
+AREA_LIST = ", ".join(CITIES[1:-1]) + " and " + CITIES[-1]
+
 CALL_ICON = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" '
              'stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 '
              '2 2z"/></svg>')
@@ -55,7 +59,7 @@ PAGES = [
             ("What do the percentages mean?", "The number is how much light gets through. 70% is barely there, 35% is the classic look, 20% is dark and 5% is limo. Try them on the G-wagon on our homepage."),
             ("When can I roll my windows down?", "Give the film a few days to cure first. We'll tell you exactly how long for your film when we finish."),
             ("Will it bubble or turn purple?", "Bubbling and purple fade usually come from cheap film or a rushed install. Ask us which films we carry and what they cover when we quote."),
-            ("Can you come to me?", "Yes. We're fully mobile around Houston, or you can bring it to our shop in Cypress."),
+            ("Can you come to me?", f"Yes. We're mobile across {AREA_LIST}, or you can bring it to our shop in Cypress."),
         ],
     },
     {
@@ -138,7 +142,7 @@ PAGES = [
             ("How much does a headliner cost?", "It depends on the vehicle and whether it has a sunroof. Text us the year, make and model and we'll text you a quote."),
             ("Can I pick the fabric color?", "Tell us what you want and we'll tell you what we can get for your car."),
             ("How long does it take?", "We'll give you a time with your quote so you can plan around it."),
-            ("Can you come to me?", "Ask when you request your quote. We're mobile around Houston and have a shop in Cypress."),
+            ("Can you come to me?", f"Ask when you request your quote. We're mobile across {AREA_LIST}, and our shop is in Cypress."),
         ],
     },
 ]
@@ -242,7 +246,7 @@ def build(page, parts):
             {"@type": "Service", "@id": url + "#service", "name": html.unescape(page["h1"]),
              "serviceType": page["service_type"], "url": url,
              "provider": {"@id": SITE + "#business"},
-             "areaServed": [{"@type": "City", "name": "Cypress, TX"}, {"@type": "City", "name": "Houston, TX"}]},
+             "areaServed": [{"@type": "City", "name": f"{c}, TX"} for c in CITIES]},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE},
                 {"@type": "ListItem", "position": 2, "name": page["nav"], "item": url}]},
