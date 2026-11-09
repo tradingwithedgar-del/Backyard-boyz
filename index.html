@@ -181,6 +181,8 @@ p{margin:0;}
 .shot--feat img{aspect-ratio:1/1;}
 .shot figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:2px;padding:var(--s-6) var(--s-3) var(--s-3);background:linear-gradient(to top,rgba(14,15,16,.88),rgba(14,15,16,.6) 55%,transparent);color:var(--paper);font-size:14px;font-weight:500;line-height:1.3;}
 .shot figcaption .mono{font-size:11px;color:var(--gold);}
+.shot-tag{position:absolute;top:var(--s-2);left:var(--s-2);z-index:1;background:var(--paper);color:var(--ink);padding:4px 8px;border-radius:var(--r);font-size:11px;}
+.shot-tag--after{background:var(--gold);}
 
 /* ---------- testimonials ---------- */
 .quotes{display:grid;gap:var(--s-6);}
@@ -587,16 +589,18 @@ footer .wrap{display:grid;gap:var(--s-6);}
         <figcaption><span class="mono">Glass</span>Windshield job on a classic Mustang</figcaption>
       </figure>
       <figure class="shot">
-        <img src="work/toyota-rear-window-tint.webp" alt="Gray Toyota sedan with dark tint on the rear side windows" width="905" height="1200" loading="lazy" style="object-position:55% 50%">
-        <figcaption><span class="mono">Auto tint</span>Rear windows on a Toyota</figcaption>
+        <span class="shot-tag mono">Before</span>
+        <img src="work/broken-door-glass.webp" alt="Before: gray Toyota with the rear door glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 72%">
+        <figcaption><span class="mono">Glass · before</span>Busted rear door glass on a Toyota</figcaption>
+      </figure>
+      <figure class="shot">
+        <span class="shot-tag shot-tag--after mono">After</span>
+        <img src="work/toyota-rear-window-tint.webp" alt="After: the same gray Toyota with new rear door glass, tinted dark" width="905" height="1200" loading="lazy" style="object-position:55% 50%">
+        <figcaption><span class="mono">Glass + tint · after</span>Same door: new glass in and tinted</figcaption>
       </figure>
       <figure class="shot">
         <img src="work/home-window-film.webp" alt="House window mid-job: bubbled old film on the left panes, clean glass on the right" width="903" height="1200" loading="lazy">
         <figcaption><span class="mono">Home</span>Bubbled old film coming off</figcaption>
-      </figure>
-      <figure class="shot">
-        <img src="work/broken-door-glass.webp" alt="Rear door with the side glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 72%">
-        <figcaption><span class="mono">Glass</span>Busted door glass, before the fix</figcaption>
       </figure>
       <figure class="shot">
         <img src="work/headliner-removed.webp" alt="Worn-out headliner board with the fabric falling apart, pulled out of a car" width="898" height="1200" loading="lazy" style="object-position:50% 65%">
