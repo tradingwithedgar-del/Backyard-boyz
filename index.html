@@ -194,10 +194,10 @@ p{margin:0;}
 /* ---------- testimonials ---------- */
 .quotes{display:grid;gap:var(--s-6);}
 .quote-card{display:grid;gap:var(--s-3);align-content:start;margin:0;}
-.quote-card::before{content:"\201C";font-family:var(--f-display);font-weight:900;font-size:72px;line-height:.6;color:var(--gold-ink);height:32px;}
+.quote-card::before{order:-2;content:"\201C";font-family:var(--f-display);font-weight:900;font-size:72px;line-height:.6;color:var(--gold-ink);height:32px;}
 .quote-card blockquote{margin:0;font-size:18px;line-height:1.5;}
 .quote-card figcaption{color:var(--ink-2);}
-.placeholder-flag{justify-self:start;background:var(--warn);color:var(--clear);padding:3px 8px;border-radius:var(--r);}
+.stars{color:var(--gold-ink);letter-spacing:.12em;font-size:16px;line-height:1;order:-1;}
 
 /* ---------- quote form ---------- */
 .quote-wrap{display:grid;gap:var(--s-7);align-items:start;}
@@ -295,7 +295,7 @@ footer .wrap{display:grid;gap:var(--s-6);}
   .benefits{grid-template-columns:repeat(3,1fr);}
   .svc-grid{grid-template-columns:repeat(4,1fr);}
   .steps{grid-template-columns:repeat(3,1fr);}
-  .quotes{grid-template-columns:repeat(3,1fr);}
+  .quotes{grid-template-columns:repeat(2,1fr);gap:var(--s-7) var(--s-8);}
   .quote-wrap{grid-template-columns:1fr 1.1fr;gap:var(--s-8);}
   .q-aside{position:sticky;top:96px;}
   .faq-wrap{display:grid;grid-template-columns:1fr 1.6fr;gap:var(--s-8);align-items:start;}
@@ -548,30 +548,36 @@ footer .wrap{display:grid;gap:var(--s-6);}
 </section>
 
 <!-- ============ TESTIMONIALS ============ -->
-<!-- REPLACE BEFORE LAUNCH: paste real reviews word for word (with the customer's OK), then delete each .placeholder-flag.
-     If there are no real reviews by launch day, delete this whole <section>. Never ship the sample text. -->
-<section class="band band--haze" aria-labelledby="revTitle">
+<!-- Real Google reviews, quoted word for word (Gerardo's is cut at a sentence end where Google truncates it).
+     Shown with first name + last initial. To add one, copy a .quote-card block. -->
+<section class="band band--haze" id="reviews" aria-labelledby="revTitle">
   <span class="vlt mono" aria-hidden="true">VLT 50%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">Reviews</span>
       <h2 id="revTitle">What customers say</h2>
+      <p>Recent five-star reviews from Google.</p>
     </div>
     <div class="quotes">
       <figure class="quote-card">
-        <span class="mono placeholder-flag">Placeholder, add real review</span>
-        <blockquote><p>Paste a real Google or Instagram review here, word for word.</p></blockquote>
-        <figcaption class="mono">First name L. · Vehicle or job</figcaption>
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote><p>Hector and his team were fast and efficient and have great quality work and affordable service! I Recommend them 100 %</p></blockquote>
+        <figcaption class="mono">Chris W. · Google review</figcaption>
       </figure>
       <figure class="quote-card">
-        <span class="mono placeholder-flag">Placeholder, add real review</span>
-        <blockquote><p>A mobile job review works well here, since it backs up "we come to you."</p></blockquote>
-        <figcaption class="mono">First name L. · Vehicle or job</figcaption>
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote><p>If you’re looking for high-quality tint work, look no further. They did an absolute perfectionist job on my car. The micro-edges are clean, the film laid down smooth with zero bubbles, and the whole vehicle looks elevated.</p></blockquote>
+        <figcaption class="mono">Gerardo C. · Google review</figcaption>
       </figure>
       <figure class="quote-card">
-        <span class="mono placeholder-flag">Placeholder, add real review</span>
-        <blockquote><p>A home or business tint review here shows you do more than cars.</p></blockquote>
-        <figcaption class="mono">First name L. · Vehicle or job</figcaption>
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote><p>As someone who hates dealing with anything car related, this business hands down has the best customer service ever! Got me out of a pinch in no time at all. And when they say open 24 hours a day, they mean it. Thank you! 🙏</p></blockquote>
+        <figcaption class="mono">Arturo C. · Google review</figcaption>
+      </figure>
+      <figure class="quote-card">
+        <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote><p>Hector is quick to respond, service was great!!</p></blockquote>
+        <figcaption class="mono">Samantha V. · Google review</figcaption>
       </figure>
     </div>
   </div>

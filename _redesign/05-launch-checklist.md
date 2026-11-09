@@ -17,7 +17,7 @@
 
 ## 🚫 Must fix before launch (blocking)
 
-- [ ] **Reviews section:** paste 3 real reviews word for word with each customer's OK, and delete the orange "Placeholder" flags. **If you don't have them, delete the whole Reviews `<section>`.** Fake or sample reviews can't go live.
+- [x] **Reviews:** 4 real five-star Google reviews (Chris W., Gerardo C., Arturo C., Samantha V.) are in, word for word, first name + last initial. Arturo's mentions "open 24 hours a day". Confirm the shop still advertises that, since the site now repeats it.
 - [x] **Photos:** 5 real job photos are in `work/` (Mustang windshield, Toyota tint, home film, broken door glass, headliner). The plate and the bystander in the headliner photo are blurred. A 6th photo (cracked windshield) was sent but didn't upload, so re-send it and it goes in the grid as a sixth tile.
 - [ ] **Confirm with Hector & Adrian:**
   - [ ] "4+ years" is still accurate.
@@ -114,11 +114,11 @@ Whichever you pick:
 
 ## Risk scan (pre-launch, on this branch)
 
-**Verdict: Fix 1 item first** (the review placeholders). Photos are done. Everything else is clear.
+**Verdict: Clear to launch** once the owner confirmations above are checked. Reviews and photos are real; no placeholders remain.
 
 | Severity | Area | Evidence | Fix |
 |---|---|---|---|
-| Blocking | Social proof | `Placeholder, add real review` ×3 | Real reviews or delete the section |
+| Info | Social proof | Arturo C. review: "open 24 hours a day" | Confirm the 24-hour claim still matches the Google listing |
 | Medium | Legal claim | "Texas lets you run 25% or lighter on the front side windows" | Brothers confirm wording. It's a law summary, not legal advice. |
 | Medium | Claims | "4+ years", "Hector or Adrian will text your quote" | Confirm still true |
 | Low | Privacy policy | Says no analytics; Google Fonts loads from Google | Update when analytics is added |
