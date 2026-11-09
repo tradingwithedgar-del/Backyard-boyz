@@ -8,7 +8,7 @@
 |---|---|
 | **Pages** | `index.html` (redesigned), `privacy.html` (unchanged, still the old dark style). |
 | **Page weight** | Old homepage was **209 KB** because the logo was pasted into the HTML 4 times as text. The new homepage is **50 KB** (14 KB gzipped), plus the logo as one cached **32 KB** file. |
-| **Images** | Only the logo and favicon so far (pulled out into `logo.webp` and `favicon.webp`). **No work photos yet:** 6 photo slots are waiting. `og-image.jpg` (1200×630) is unchanged. |
+| **Images** | New logo (`logo.webp`, `favicon.webp`) and 5 job photos in `work/`, all WebP under 160 KB. Plate and bystander blurred in the headliner shot. `og-image.jpg` (1200×630) carries the new logo. |
 | **Forms** | One quote form → Web3Forms → shop email, with hCaptcha and a honeypot. Now also sends the **shade** they picked. Errors show inline (the old version used pop-up alerts). |
 | **Domain** | `CNAME` = `backyardboyzautollc.com` on GitHub Pages. The canonical and OG URLs used to say `Backyardboyzautollc.com` (capital B); they're now all lowercase. I couldn't reach the live domain from this sandbox, so the DNS/HTTPS checks below need doing by hand. |
 | **Tracking** | None. The privacy policy says there's no analytics. **If you add analytics, the policy has to change too** (step 7). |
@@ -18,7 +18,7 @@
 ## 🚫 Must fix before launch (blocking)
 
 - [ ] **Reviews section:** paste 3 real reviews word for word with each customer's OK, and delete the orange "Placeholder" flags. **If you don't have them, delete the whole Reviews `<section>`.** Fake or sample reviews can't go live.
-- [ ] **Photo slots:** replace all 6 `.ph` boxes with the brothers' own job photos (rules in `02-design-system.md`). If you only have 3, delete the other 3 so the grid stays even. No stock and no photos from other shops.
+- [x] **Photos:** 5 real job photos are in `work/` (Mustang windshield, Toyota tint, home film, broken door glass, headliner). The plate and the bystander in the headliner photo are blurred. A 6th photo (cracked windshield) was sent but didn't upload, so re-send it and it goes in the grid as a sixth tile.
 - [ ] **Confirm with Hector & Adrian:**
   - [ ] "4+ years" is still accurate.
   - [ ] They're OK with "Hector or Adrian will text your quote" (it promises a text reply).
@@ -114,12 +114,11 @@ Whichever you pick:
 
 ## Risk scan (pre-launch, on this branch)
 
-**Verdict: Fix 2 items first** (the review placeholders and photo slots). Everything else is clear.
+**Verdict: Fix 1 item first** (the review placeholders). Photos are done. Everything else is clear.
 
 | Severity | Area | Evidence | Fix |
 |---|---|---|---|
 | Blocking | Social proof | `Placeholder, add real review` ×3 | Real reviews or delete the section |
-| High | Photos / credibility | `Photo slot 1`–`6` | Own job photos or remove the slots |
 | Medium | Legal claim | "Texas lets you run 25% or lighter on the front side windows" | Brothers confirm wording. It's a law summary, not legal advice. |
 | Medium | Claims | "4+ years", "Hector or Adrian will text your quote" | Confirm still true |
 | Low | Privacy policy | Says no analytics; Google Fonts loads from Google | Update when analytics is added |

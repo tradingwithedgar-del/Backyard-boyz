@@ -170,14 +170,17 @@ p{margin:0;}
 .step p{color:var(--paper-2);}
 
 /* ---------- work ---------- */
+/* Photos live in work/. To add or swap one, copy a <figure class="shot"> block and change src, alt and caption.
+   Photo rules: your own jobs only, WebP under 200 KB, plates and faces blurred. See _redesign/02-design-system.md
+   The first .shot--feat photo is the big one (spans two rows on wider screens). */
 .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2);margin-bottom:var(--s-6);}
-/* IMAGE SWAP: each .ph is a photo slot. Replace the whole <div class="ph">…</div> with
-   <img src="work/your-photo.webp" alt="Describe the vehicle and shade" width="1200" height="900" loading="lazy">
-   Photo rules: your own jobs only, 4:3, WebP under 200 KB. See _redesign/02-design-system.md */
-.ph,.work-grid img{aspect-ratio:4/3;width:100%;height:auto;object-fit:cover;border-radius:var(--r);}
-.ph{display:grid;place-content:center;gap:6px;text-align:center;padding:var(--s-3);border:1.5px dashed rgba(20,22,23,.3);background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(20,22,23,.04) 10px 20px);color:var(--ink-2);}
-.ph .mono{font-size:11px;}
-.ph b{font-weight:600;font-size:14px;color:var(--ink);line-height:1.3;}
+.shot{position:relative;margin:0;overflow:hidden;border-radius:var(--r);background:var(--haze);}
+.shot img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;transition:transform .4s ease;}
+.shot:hover img{transform:scale(1.03);}
+.shot--feat{grid-column:span 2;}
+.shot--feat img{aspect-ratio:1/1;}
+.shot figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:2px;padding:var(--s-6) var(--s-3) var(--s-3);background:linear-gradient(to top,rgba(14,15,16,.88),rgba(14,15,16,.6) 55%,transparent);color:var(--paper);font-size:14px;font-weight:500;line-height:1.3;}
+.shot figcaption .mono{font-size:11px;color:var(--gold);}
 
 /* ---------- testimonials ---------- */
 .quotes{display:grid;gap:var(--s-6);}
@@ -266,6 +269,8 @@ footer .wrap{display:grid;gap:var(--s-6);}
   .proof ul{grid-template-columns:repeat(4,auto);justify-content:space-between;}
   .svc-grid{grid-template-columns:1fr 1fr;}
   .work-grid{grid-template-columns:repeat(3,1fr);}
+  .shot--feat{grid-column:auto;grid-row:span 2;}
+  .shot--feat img{position:absolute;inset:0;height:100%;aspect-ratio:auto;}
   .f-cols{grid-template-columns:repeat(3,1fr);}
 }
 @media (min-width:900px){
@@ -575,14 +580,28 @@ footer .wrap{display:grid;gap:var(--s-6);}
       <h2 id="workTitle">See it on real cars</h2>
       <p>Every job we finish goes up on Instagram. Here are a few. There's a lot more on the page.</p>
     </div>
-    <!-- IMAGE SWAP: replace each .ph block with one of your own photos (see the note in the CSS above .ph). -->
+    <!-- Real job photos. To add or swap one, see the note in the CSS above .work-grid. -->
     <div class="work-grid">
-      <div class="ph"><span class="mono">Photo slot 1</span><b>Truck or SUV, side profile</b></div>
-      <div class="ph"><span class="mono">Photo slot 2</span><b>Before / after, same angle</b></div>
-      <div class="ph"><span class="mono">Photo slot 3</span><b>Car at the Cypress shop</b></div>
-      <div class="ph"><span class="mono">Photo slot 4</span><b>Home or storefront windows</b></div>
-      <div class="ph"><span class="mono">Photo slot 5</span><b>Mobile job in a driveway</b></div>
-      <div class="ph"><span class="mono">Photo slot 6</span><b>Windshield or headliner</b></div>
+      <figure class="shot shot--feat">
+        <img src="work/mustang-windshield-install.webp" alt="White classic Mustang in the shop with its windshield taped in place" width="701" height="1200" loading="lazy" style="object-position:50% 40%">
+        <figcaption><span class="mono">Glass</span>Windshield job on a classic Mustang</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="work/toyota-rear-window-tint.webp" alt="Gray Toyota sedan with dark tint on the rear side windows" width="905" height="1200" loading="lazy" style="object-position:55% 50%">
+        <figcaption><span class="mono">Auto tint</span>Rear windows on a Toyota</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="work/home-window-film.webp" alt="House window mid-job: bubbled old film on the left panes, clean glass on the right" width="903" height="1200" loading="lazy">
+        <figcaption><span class="mono">Home</span>Bubbled old film coming off</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="work/broken-door-glass.webp" alt="Rear door with the side glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 72%">
+        <figcaption><span class="mono">Glass</span>Busted door glass, before the fix</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="work/headliner-removed.webp" alt="Worn-out headliner board with the fabric falling apart, pulled out of a car" width="898" height="1200" loading="lazy" style="object-position:50% 65%">
+        <figcaption><span class="mono">Interior</span>Worn-out headliner, pulled for new fabric</figcaption>
+      </figure>
     </div>
     <a class="btn btn--ink" href="https://instagram.com/backyardd.boyzz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>See more on Instagram</a>
   </div>
