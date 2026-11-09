@@ -127,10 +127,10 @@ p{margin:0;}
 .picker-read{font-family:var(--f-display);font-weight:900;font-size:44px;line-height:.9;font-variant-numeric:tabular-nums;}
 .picker svg{width:100%;height:auto;display:block;border-radius:var(--r);}
 #glassTint,#glassClear{transition:opacity .4s ease;}
-.gw-stage{position:relative;overflow:hidden;border-radius:var(--r);background:#0B0B0C;perspective:1100px;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
+.gw-stage{position:relative;overflow:hidden;border-radius:var(--r);background:#0B0B0C;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
 .gw-stage:active{cursor:grabbing;}
-.gw-turn{transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.7,.2,1);will-change:transform;}
-.gw-turn.dragging{transition:none;}
+#gwGlass{transition:opacity .2s ease;}
+#gwGlass.off{opacity:0;}
 .gw-turn svg{display:block;width:100%;height:auto;}
 .gw-hint{position:absolute;left:var(--s-2);bottom:var(--s-2);display:inline-flex;align-items:center;gap:6px;background:rgba(14,15,16,.7);color:var(--paper);padding:5px 9px;border-radius:var(--r);font-size:11px;pointer-events:none;}
 .gw-hint svg{width:14px;height:14px;}
@@ -395,9 +395,9 @@ footer .wrap{display:grid;gap:var(--s-6);}
         <span class="mono" id="pickerTitle">Try a shade</span>
         <span class="picker-read" aria-live="polite"><span id="vltRead">35%</span><span class="sr-only"> visible light</span></span>
       </div>
-      <!-- Rendered G-wagon (an illustration, not a customer job). Window outlines below are traced on this exact image;
-           if the image is swapped, the clipPath polygons must be re-traced. Drag (or arrow keys) turns it. -->
-      <div class="gw-stage" id="gwStage" tabindex="0" role="img" aria-label="Black G-wagon showing how dark the selected tint looks on its side windows. Drag or use the arrow keys to turn it.">
+      <!-- Rendered G-wagon 360 spin (an illustration, not a customer job): 36 frames in spin/, 10 degrees apart.
+           The window outlines below are traced on frame g01 only, so the tint shows when the car is turned back to that angle. -->
+      <div class="gw-stage" id="gwStage" tabindex="0" role="img" aria-label="Black G-wagon showing how dark the selected tint looks on its side windows. Drag or use the arrow keys to spin it 360 degrees.">
         <div class="gw-turn" id="gwTurn">
           <svg viewBox="0 0 2000 1125" aria-hidden="true">
             <defs>
@@ -413,15 +413,15 @@ footer .wrap{display:grid;gap:var(--s-6);}
                 <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
               </linearGradient>
             </defs>
-            <image href="work/g63-render.webp" width="2000" height="1125"/>
-            <g clip-path="url(#glass)">
+            <image id="gwFrame" href="spin/g01.webp" width="2000" height="1125"/>
+            <g id="gwGlass" clip-path="url(#glass)">
               <rect id="glassClear" x="1150" y="240" width="440" height="160" fill="url(#clearGlass)" opacity=".25"/>
               <rect id="glassTint" x="1150" y="240" width="440" height="160" fill="#050607" opacity=".45"/>
               <path d="M1150 400 L1250 240 L1300 240 L1200 400 Z M1320 400 L1420 240 L1440 240 L1340 400 Z M1450 400 L1550 240 L1600 240 L1500 400 Z" fill="url(#glare)"/>
             </g>
           </svg>
         </div>
-        <span class="gw-hint mono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M3 12h18"/></svg>Drag to turn</span>
+        <span class="gw-hint mono" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8l-4 4 4 4M17 8l4 4-4 4M3 12h18"/></svg>Drag to spin 360°</span>
       </div>
       <div class="chips" role="group" aria-label="Tint shade">
         <button type="button" class="chip" data-vlt="70" aria-pressed="false">70%<span>Barely</span></button>
@@ -805,41 +805,49 @@ function setShade(vlt){
   shadeQuote.textContent = 'Quote me on ' + vlt + '% →';
   document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.vlt === vlt)));
 }
-document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => setShade(+c.dataset.vlt)));
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => { setShade(+c.dataset.vlt); if(window.gwHome) window.gwHome(); }));
 setShade(35);
 shadeQuote.addEventListener('click', () => {
   shadeSelect.value = currentVlt + '%';
   pickService('Auto window tint');
 });
 
-// ---------- drag to turn ----------
-// One render can't truly spin, so dragging tilts it in 3D; past the edge it swaps to the mirrored side,
-// which reads like the car turning on the turntable.
+// ---------- 360 spin ----------
+// 36 frames from the turntable video. Window outlines only fit frame 1, so the tint hides while spinning
+// and the car turns back to frame 1 shortly after it is let go.
 (function(){
-  const stage = document.getElementById('gwStage'), turn = document.getElementById('gwTurn');
-  const MAX = 28;
-  let ry = -8, mirrored = false, startX = null, startRy = 0;
+  const N = 36, src = i => 'spin/g' + String(i + 1).padStart(2, '0') + '.webp';
+  const stage = document.getElementById('gwStage'), frame = document.getElementById('gwFrame'), glass = document.getElementById('gwGlass');
   const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function draw(){ turn.style.transform = 'rotateY(' + ry + 'deg) scaleX(' + (mirrored ? -1 : 1) + ')'; }
-  function setRy(v){
-    if(v > MAX || v < -MAX){
-      mirrored = !mirrored;
-      v = v > MAX ? -MAX + (v - MAX) : MAX + (v + MAX);
-      if(!still){
-        turn.animate([{transform:turn.style.transform},{transform:'rotateY(' + (v > 0 ? -90 : 90) + 'deg) scaleX(' + (mirrored ? 1 : -1) + ')'}],{duration:140,easing:'ease-in'});
-      }
-    }
-    ry = Math.max(-MAX, Math.min(MAX, v)); draw();
+  let pos = 0, shown = 0, startX = null, startPos = 0, homeTimer = null, anim = null;
+  const cache = [];
+  function preload(){ for(let i = 1; i < N; i++){ const im = new Image(); im.src = src(i); cache.push(im); } }
+  if(document.readyState === 'complete') setTimeout(preload, 300); else window.addEventListener('load', () => setTimeout(preload, 300));
+  function draw(){
+    const i = ((Math.round(pos) % N) + N) % N;
+    if(i !== shown){ frame.setAttribute('href', src(i)); shown = i; }
+    glass.classList.toggle('off', i !== 0);
   }
-  stage.addEventListener('pointerdown', e => { startX = e.clientX; startRy = ry; turn.classList.add('dragging'); stage.setPointerCapture(e.pointerId); });
-  stage.addEventListener('pointermove', e => { if(startX === null) return; const v = startRy + (e.clientX - startX) * .25; if(v > MAX || v < -MAX){ startX = e.clientX; startRy = v > MAX ? -MAX : MAX; } setRy(v); });
-  const end = () => { startX = null; turn.classList.remove('dragging'); };
+  function goHome(){
+    cancelAnimationFrame(anim);
+    const target = Math.round(pos / N) * N, from = pos, dist = target - from;
+    if(still || !dist){ pos = target; draw(); return; }
+    const dur = Math.min(900, 60 + Math.abs(dist) * 40), t0 = performance.now();
+    (function step(t){
+      const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      pos = from + dist * e; draw();
+      if(k < 1) anim = requestAnimationFrame(step);
+    })(t0);
+  }
+  window.gwHome = goHome;
+  function soon(){ clearTimeout(homeTimer); homeTimer = setTimeout(goHome, 1400); }
+  stage.addEventListener('pointerdown', e => { cancelAnimationFrame(anim); clearTimeout(homeTimer); startX = e.clientX; startPos = pos; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove', e => { if(startX === null) return; pos = startPos - (e.clientX - startX) * N / (stage.clientWidth * 1.4); draw(); });
+  const end = () => { if(startX === null) return; startX = null; soon(); };
   stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
   stage.addEventListener('keydown', e => {
-    if(e.key === 'ArrowRight'){ e.preventDefault(); setRy(ry + 10); }
-    if(e.key === 'ArrowLeft'){ e.preventDefault(); setRy(ry - 10); }
+    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); cancelAnimationFrame(anim); pos += e.key === 'ArrowRight' ? -1 : 1; draw(); soon(); }
   });
-  draw();
 })();
 
 // ---------- quote flow ----------
