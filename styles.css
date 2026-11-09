@@ -92,8 +92,6 @@ p{margin:0;}
 #glassTint,#glassClear{transition:opacity .4s ease;}
 .gw-stage{position:relative;overflow:hidden;border-radius:var(--r);background:#0B0B0C;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
 .gw-stage:active{cursor:grabbing;}
-#gwGlass{transition:opacity .2s ease;}
-#gwGlass.off{opacity:0;}
 .gw-turn svg{display:block;width:100%;height:auto;}
 .gw-hint{position:absolute;left:var(--s-2);bottom:var(--s-2);display:inline-flex;align-items:center;gap:6px;background:rgba(14,15,16,.7);color:var(--paper);padding:5px 9px;border-radius:var(--r);font-size:11px;pointer-events:none;}
 .gw-hint svg{width:14px;height:14px;}
