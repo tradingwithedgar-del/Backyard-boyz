@@ -15,7 +15,7 @@ PHONE_TEL = "tel:+18328596786"
 PHONE = "(832) 859-6786"
 
 # Service area: shop in Cypress, mobile to the rest. Keep in sync with the homepage "Where we work" section.
-CITIES = ["Cypress", "Houston", "Katy", "Jersey Village", "Tomball", "The Woodlands", "Spring", "Pasadena", "Humble", "Kingwood"]
+CITIES = ["Cypress", "Houston", "Katy", "Jersey Village", "Tomball", "The Woodlands", "Spring", "Pasadena", "Humble", "Kingwood", "Friendswood", "Missouri City", "Bellaire", "Stafford", "Cloverleaf"]
 AREA_LIST = ", ".join(CITIES[1:-1]) + " and " + CITIES[-1]
 
 CALL_ICON = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" '
