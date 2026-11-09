@@ -50,7 +50,7 @@
       "email":"llcbackyardboyz@gmail.com",
       "priceRange":"$$",
       "address":{"@type":"PostalAddress","addressLocality":"Cypress","addressRegion":"TX","addressCountry":"US"},
-      "areaServed":[{"@type":"City","name":"Cypress, TX"},{"@type":"City","name":"Houston, TX"}],
+      "areaServed":[{"@type":"City","name":"Cypress, TX"},{"@type":"City","name":"Houston, TX"},{"@type":"City","name":"Katy, TX"},{"@type":"City","name":"Jersey Village, TX"},{"@type":"City","name":"Tomball, TX"},{"@type":"City","name":"The Woodlands, TX"},{"@type":"City","name":"Spring, TX"},{"@type":"City","name":"Pasadena, TX"},{"@type":"City","name":"Humble, TX"},{"@type":"City","name":"Kingwood, TX"}],
       "sameAs":["https://instagram.com/backyardd.boyzz"],
       "hasOfferCatalog":{
         "@type":"OfferCatalog",
@@ -120,37 +120,30 @@
         <span class="picker-read" aria-live="polite"><span id="vltRead">35%</span><span class="sr-only"> visible light</span></span>
       </div>
       <!-- Rendered G-wagon 360 spin (an illustration, not a customer job): 36 frames in spin/, 10 degrees apart.
-           The window outlines below are traced on frame g01 only, so the tint shows when the car is turned back to that angle. -->
+           Window outlines for every frame live in GW_WINDOWS in the script below. -->
       <div class="gw-stage" id="gwStage" tabindex="0" role="img" aria-label="Black G-wagon showing how dark the selected tint looks on its side windows. Drag or use the arrow keys to spin it 360 degrees.">
         <div class="gw-turn" id="gwTurn">
           <svg viewBox="0 0 2000 1125" aria-hidden="true">
             <defs>
-              <clipPath id="glass">
-                <path d="M1170 250 L1279 249 L1289 394 L1243 394 L1240 378 L1222 368 L1190 366 L1165 370 L1161 372 Z"/>
-                <path d="M1331 250 L1421 250 L1431 387 L1341 390 Z"/>
-                <path d="M1461 245 L1565 244 L1582 380 L1471 384 Z"/>
-              </clipPath>
+              <clipPath id="glass"><path id="gwGlassPath" d="M1170 250L1279 249L1289 394L1243 394L1240 378L1222 368L1190 366L1165 370L1161 372Z M1331 250L1421 250L1431 387L1341 390Z M1461 245L1565 244L1582 380L1471 384Z"/></clipPath>
               <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="5"/></filter>
-              <linearGradient id="clearGlass" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="clearGlass" x1="0" y1="160" x2="0" y2="520" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#C9D2D6"/><stop offset=".55" stop-color="#8E989D"/><stop offset="1" stop-color="#5F676C"/>
-              </linearGradient>
-              <linearGradient id="glare" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".18"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
               </linearGradient>
             </defs>
             <image id="gwFrame" href="spin/g01.webp" width="2000" height="1125"/>
             <g id="gwGlass" clip-path="url(#glass)">
               <g id="glassClear" opacity=".36">
-                <rect x="1150" y="240" width="440" height="160" fill="url(#clearGlass)"/>
-                <!-- seen through clear glass: headrests and seat backs -->
-                <g fill="#2E3438" filter="url(#soft)">
+                <rect width="2000" height="1125" fill="url(#clearGlass)"/>
+                <!-- seen through clear glass at the starting angle: headrests and seat backs -->
+                <g id="gwSeats" fill="#2E3438" filter="url(#soft)">
                   <rect x="1212" y="292" width="44" height="44" rx="14"/><rect x="1200" y="338" width="70" height="60" rx="10"/>
                   <rect x="1362" y="294" width="40" height="40" rx="13"/><rect x="1350" y="336" width="64" height="60" rx="10"/>
                   <rect x="1470" y="330" width="120" height="8" fill="#454C51"/>
                 </g>
               </g>
-              <rect id="glassTint" x="1150" y="240" width="440" height="160" fill="#050607" opacity=".25"/>
-              <path d="M1150 400 L1250 240 L1300 240 L1200 400 Z M1320 400 L1420 240 L1440 240 L1340 400 Z M1450 400 L1550 240 L1600 240 L1500 400 Z" fill="url(#glare)"/>
+              <rect id="glassTint" width="2000" height="1125" fill="#050607" opacity=".25"/>
+              <path d="M300 520 L500 160 L540 160 L340 520 Z M430 520 L630 160 L670 160 L470 520 Z M560 520 L760 160 L800 160 L600 520 Z M690 520 L890 160 L930 160 L730 520 Z M820 520 L1020 160 L1060 160 L860 520 Z M950 520 L1150 160 L1190 160 L990 520 Z M1080 520 L1280 160 L1320 160 L1120 520 Z M1210 520 L1410 160 L1450 160 L1250 520 Z M1340 520 L1540 160 L1580 160 L1380 520 Z M1470 520 L1670 160 L1710 160 L1510 520 Z M1600 520 L1800 160 L1840 160 L1640 520 Z M1730 520 L1930 160 L1970 160 L1770 520 Z M1860 520 L2060 160 L2100 160 L1900 520 Z" fill="#fff" opacity=".07"/>
             </g>
           </svg>
         </div>
@@ -210,7 +203,6 @@
 
 <!-- ============ SERVICES (VLT 50%) ============ -->
 <section class="band band--haze" id="services" aria-labelledby="svcTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 50%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">Services</span>
@@ -247,7 +239,6 @@
 
 <!-- ============ HOW IT WORKS (VLT 35%) ============ -->
 <section class="band band--smoke" id="how" aria-labelledby="howTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 35%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">How it works</span>
@@ -258,6 +249,32 @@
       <li class="step"><span class="n" aria-hidden="true">2</span><div><h3>Get your quote by text.</h3><p>We text your price and the shades that make sense for you.</p></div></li>
       <li class="step"><span class="n" aria-hidden="true">3</span><div><h3>Shop or driveway.</h3><p>Pull into our Cypress shop or we'll come to you. Same quality either way.</p></div></li>
     </ol>
+  </div>
+</section>
+
+<!-- ============ SERVICE AREA ============ -->
+<section class="band band--clear" id="area" aria-labelledby="areaTitle">
+  <div class="wrap area-wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">Service area</span>
+      <h2 id="areaTitle">Where we work</h2>
+      <p>Our shop is in Cypress. We also come to you, at home or at work, across the Houston area.</p>
+    </div>
+    <div class="area">
+      <p class="area-shop mono"><b>Shop</b>Cypress, TX</p>
+      <ul class="area-list" aria-label="Mobile service areas">
+        <li>Houston</li>
+        <li>Katy</li>
+        <li>Jersey Village</li>
+        <li>Tomball</li>
+        <li>The Woodlands</li>
+        <li>Spring</li>
+        <li>Pasadena</li>
+        <li>Humble</li>
+        <li>Kingwood</li>
+      </ul>
+      <p class="note">Not on the list? <a class="link" href="#quote">Ask anyway</a> and tell us where you are.</p>
+    </div>
   </div>
 </section>
 
@@ -302,7 +319,6 @@
 <!-- Real Google reviews, quoted word for word (Gerardo's is cut at a sentence end where Google truncates it).
      Shown with first name + last initial. To add one, copy a .quote-card block. -->
 <section class="band band--haze" id="reviews" aria-labelledby="revTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 50%</span>
   <div class="wrap">
     <div class="sec-head">
       <span class="mono eyebrow">Reviews</span>
@@ -337,7 +353,6 @@
 
 <!-- ============ QUOTE FORM (VLT 20%) ============ -->
 <section class="band band--smoke" id="quote" aria-labelledby="quoteTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 20%</span>
   <div class="wrap quote-wrap">
     <div class="q-aside">
       <div class="sec-head">
@@ -422,7 +437,7 @@
       </details>
       <details>
         <summary>Can you come to me?</summary>
-        <div class="a"><p>Yes. We're fully mobile around Houston, or you can bring it to our shop in Cypress. Just tell us where when you request your quote.</p></div>
+        <div class="a"><p>Yes. We're mobile across Houston, Katy, Jersey Village, Tomball, The Woodlands, Spring, Pasadena, Humble and Kingwood, or you can bring it to our shop in Cypress. Just tell us where when you request your quote.</p></div>
       </details>
       <details>
         <summary>How long does it take?</summary>
@@ -448,7 +463,6 @@
 
 <!-- ============ CLOSING (VLT 5%) ============ -->
 <section class="band band--limo closing" aria-labelledby="closeTitle">
-  <span class="vlt mono" aria-hidden="true">VLT 5%</span>
   <div class="wrap">
     <h2 id="closeTitle">Ready when you are.</h2>
     <p>Tell us what you drive or what's getting too much sun. We'll text you a quote.</p>
@@ -482,6 +496,7 @@
         <ul>
           <li>Shop in Cypress, TX</li>
           <li>Mobile across Houston</li>
+          <li class="f-area">Katy · Jersey&nbsp;Village · Tomball · The&nbsp;Woodlands · Spring · Pasadena · Humble · Kingwood</li>
         </ul>
       </div>
       <div>
@@ -542,7 +557,7 @@ function setShade(vlt){
   shadeQuote.textContent = 'Quote me on ' + vlt + '% →';
   document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(+c.dataset.vlt === vlt)));
 }
-document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => { setShade(+c.dataset.vlt); if(window.gwHome) window.gwHome(); }));
+document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => setShade(+c.dataset.vlt)));
 setShade(35);
 shadeQuote.addEventListener('click', () => {
   shadeSelect.value = currentVlt + '%';
@@ -550,40 +565,32 @@ shadeQuote.addEventListener('click', () => {
 });
 
 // ---------- 360 spin ----------
-// 36 frames from the turntable video. Window outlines only fit frame 1, so the tint hides while spinning
-// and the car turns back to frame 1 shortly after it is let go.
+// 36 frames from the turntable video. GW_WINDOWS holds the window outlines for each frame (traced on
+// frame 1, the far side and the rear glass, then carried through the video by tracking), so the
+// chosen tint stays on the glass as the car turns.
+const GW_WINDOWS = ["M1170 250L1279 249L1289 394L1243 394L1240 378L1222 368L1190 366L1165 370L1161 372Z M1331 250L1421 250L1431 387L1341 390Z M1461 245L1565 244L1582 380L1471 384Z","M1162 250L1274 249L1284 394L1236 394L1233 378L1215 368L1182 366L1156 370L1152 372Z M1328 250L1421 250L1430 388L1337 390Z M1462 245L1569 244L1586 381L1471 384Z","M1150 250L1267 249L1275 395L1226 395L1223 379L1204 369L1169 367L1143 370L1138 372Z M1323 250L1420 250L1428 388L1331 391Z M1464 245L1577 244L1592 382L1472 385Z","M1133 250L1257 249L1263 396L1211 395L1208 379L1188 369L1152 367L1123 371L1119 373Z M1316 250L1420 250L1426 390L1323 392Z M1466 245L1587 244L1601 383L1472 387Z","M1110 250L1243 249L1247 397L1191 396L1188 380L1167 370L1129 368L1098 371L1093 373Z M1307 250L1419 250L1422 391L1311 393Z M1469 245L1601 244L1612 385L1472 388Z","M1085 250L1227 249L1228 398L1169 397L1166 381L1144 371L1103 368L1071 372L1065 374Z M1296 250L1416 250L1417 393L1297 394Z M1471 245L1615 244L1623 388L1471 390Z","M1050 251L1203 250L1201 399L1137 398L1134 382L1110 372L1066 369L1032 373L1026 375Z M1278 251L1411 251L1407 395L1276 396Z M1472 245L1632 244L1635 391L1466 393Z","M1005 252L1171 251L1164 401L1094 399L1092 383L1067 373L1019 370L982 373L976 375Z M1252 252L1398 251L1389 398L1245 398Z M1466 246L1646 244L1645 395L1456 396Z","M957 252L1134 251L1123 402L1049 400L1047 384L1020 373L970 370L931 374L924 375Z M1222 252L1381 252L1367 401L1210 400Z M1455 246L1655 245L1649 399L1439 399Z","M902 253L1087 252L1070 403L992 401L991 384L963 373L911 370L870 373L863 375Z M1181 253L1352 252L1332 403L1163 401Z M1434 246L1656 244L1645 404L1411 402Z","M839 254L1027 252L1004 403L924 400L923 384L896 373L843 370L803 372L796 374Z M1124 253L1306 252L1278 406L1100 403Z M1395 246L1643 243L1624 410L1364 406Z","M792 256L976 253L949 404L871 400L871 384L844 374L794 370L754 372L748 374Z M1074 253L1261 251L1226 409L1045 404Z M1355 244L1624 239L1592 416L1315 409Z","M739 258L910 254L879 403L807 399L807 383L783 373L737 369L702 371L696 372Z M1002 253L1185 251L1144 411L969 404Z M1280 243L1559 236L1517 422L1232 412Z","M708 260L860 255L829 402L765 398L765 383L744 372L704 368L673 370L668 371Z M945 254L1117 250L1072 412L910 404Z M1209 241L1492 232L1438 428L1156 414Z","M692 264L818 258L781 401L728 396L730 381L713 371L681 367L656 368L652 370Z M889 257L1039 251L987 413L849 403Z","M688 266L785 260L748 399L708 393L710 379L698 369L674 365L655 366L652 368Z M841 258L962 251L910 412L801 402Z","M698 268L758 260L721 396L697 391L700 377L694 367L680 364L669 365L667 366Z M793 256L872 247L819 409L752 399Z M1208 235L1225 410L1233 383L1253 354L1277 340L1304 340L1325 349L1345 369L1364 400L1376 435L1433 433L1415 265Z","M947 246L969 415L980 389L1005 360L1037 346L1075 344L1104 353L1133 372L1160 403L1176 439L1263 437L1244 256Z","M721 246L719 408L734 382L767 354L803 340L846 338L877 346L908 365L936 397L951 434L1058 433L1052 246Z M1061 183L1177 221L1209 428L1113 449Z M1205 232L1264 252L1286 416L1234 426Z M1281 260L1318 272L1338 364L1332 370L1336 400L1301 407Z","M490 243L463 393L481 368L514 341L549 327L590 324L620 332L649 351L675 385L686 425L811 428L820 223Z M916 248L1053 248L1079 421L950 436Z M1094 251L1195 251L1219 409L1120 419Z M1228 254L1307 254L1343 350L1329 358L1332 390L1250 400Z","M327 207L291 377L310 351L344 323L381 309L421 308L449 318L475 340L494 377L499 419L608 425L653 209Z M707 248L907 249L927 420L732 432Z M968 251L1123 251L1142 411L989 419Z M1174 254L1298 254L1346 353L1322 361L1325 394L1192 402Z","M498 249L734 249L742 415L511 422Z M809 251L1006 251L1015 412L819 416Z M1073 254L1242 254L1299 357L1264 364L1265 399L1082 404Z","M394 248L623 248L621 408L396 410Z M698 250L902 250L902 410L698 410Z M974 253L1159 253L1217 359L1177 367L1175 402L974 404Z","M378 248L574 248L562 401L368 399Z M640 250L826 250L817 408L630 404Z M893 253L1072 253L1123 361L1084 368L1080 404L885 403Z","M432 247L577 248L552 392L409 388Z M627 249L771 250L749 402L604 396Z M825 253L971 253L1004 361L970 367L964 403L804 399Z","M535 247L625 249L594 383L504 377Z M656 251L747 252L719 396L626 388Z M781 255L875 257L890 360L867 365L860 400L755 393Z","M665 248L703 249L674 377L637 370Z M716 251L754 252L727 390L688 381Z M769 255L810 256L806 356L795 361L788 395L743 388Z","M1311 249L1334 248L1367 381L1358 382L1353 367L1347 358L1340 356L1335 361L1335 363Z M1345 249L1363 250L1394 371L1377 376Z M1370 246L1389 246L1421 361L1401 367Z","M1280 254L1308 250L1331 384L1319 386L1316 371L1309 362L1300 361L1294 365L1293 367Z M1322 250L1346 247L1368 374L1344 379Z M1356 242L1383 238L1408 363L1379 370Z","M1249 254L1299 250L1315 387L1293 388L1291 373L1281 363L1266 362L1255 367L1253 369Z M1323 250L1364 247L1382 377L1339 382Z M1382 242L1431 238L1453 366L1401 373Z","M1223 252L1295 249L1309 389L1279 390L1276 374L1263 365L1242 364L1225 368L1223 370Z M1329 249L1389 247L1404 380L1344 385Z M1415 241L1484 239L1506 371L1431 376Z","M1202 250L1290 249L1303 391L1266 392L1263 376L1248 366L1222 364L1201 368L1198 370Z M1332 249L1404 249L1418 383L1345 387Z M1436 244L1520 242L1540 375L1450 380Z","M1189 250L1286 249L1298 393L1257 393L1254 377L1238 367L1209 365L1187 369L1183 371Z M1332 250L1412 250L1425 385L1345 388Z M1447 245L1539 244L1558 378L1460 382Z","M1180 250L1283 249L1294 394L1250 394L1247 378L1230 368L1200 366L1176 370L1172 372Z M1332 250L1417 250L1428 386L1343 390Z M1455 245L1553 244L1571 379L1466 383Z","M1174 250L1281 249L1291 394L1246 394L1243 378L1226 368L1194 366L1170 370L1166 372Z M1332 250L1420 250L1430 387L1342 390Z M1459 245L1560 244L1578 380L1469 384Z","M1172 250L1280 249L1290 394L1245 394L1242 378L1224 368L1192 366L1168 370L1164 372Z M1332 250L1421 250L1431 387L1342 390Z M1460 245L1563 244L1580 380L1470 384Z"];
 (function(){
   const N = 36, src = i => 'spin/g' + String(i + 1).padStart(2, '0') + '.webp';
-  const stage = document.getElementById('gwStage'), frame = document.getElementById('gwFrame'), glass = document.getElementById('gwGlass');
-  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let pos = 0, shown = 0, startX = null, startPos = 0, homeTimer = null, anim = null;
+  const stage = document.getElementById('gwStage'), frame = document.getElementById('gwFrame');
+  const glassPath = document.getElementById('gwGlassPath'), seats = document.getElementById('gwSeats');
+  let pos = 0, shown = 0, startX = null, startPos = 0;
   const cache = [];
   function preload(){ for(let i = 1; i < N; i++){ const im = new Image(); im.src = src(i); cache.push(im); } }
   if(document.readyState === 'complete') setTimeout(preload, 300); else window.addEventListener('load', () => setTimeout(preload, 300));
   function draw(){
     const i = ((Math.round(pos) % N) + N) % N;
-    if(i !== shown){ frame.setAttribute('href', src(i)); shown = i; }
-    glass.classList.toggle('off', i !== 0);
+    if(i === shown) return;
+    frame.setAttribute('href', src(i));
+    glassPath.setAttribute('d', GW_WINDOWS[i] || 'M0 0Z');
+    seats.style.display = i === 0 ? '' : 'none';
+    shown = i;
   }
-  function goHome(){
-    cancelAnimationFrame(anim);
-    const target = Math.round(pos / N) * N, from = pos, dist = target - from;
-    if(still || !dist){ pos = target; draw(); return; }
-    const dur = Math.min(900, 60 + Math.abs(dist) * 40), t0 = performance.now();
-    (function step(t){
-      const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
-      pos = from + dist * e; draw();
-      if(k < 1) anim = requestAnimationFrame(step);
-    })(t0);
-  }
-  window.gwHome = goHome;
-  function soon(){ clearTimeout(homeTimer); homeTimer = setTimeout(goHome, 1400); }
-  stage.addEventListener('pointerdown', e => { cancelAnimationFrame(anim); clearTimeout(homeTimer); startX = e.clientX; startPos = pos; stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointerdown', e => { startX = e.clientX; startPos = pos; stage.setPointerCapture(e.pointerId); });
   stage.addEventListener('pointermove', e => { if(startX === null) return; pos = startPos - (e.clientX - startX) * N / (stage.clientWidth * 1.4); draw(); });
-  const end = () => { if(startX === null) return; startX = null; soon(); };
+  const end = () => { startX = null; };
   stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
   stage.addEventListener('keydown', e => {
-    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); cancelAnimationFrame(anim); pos += e.key === 'ArrowRight' ? -1 : 1; draw(); soon(); }
+    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){ e.preventDefault(); pos += e.key === 'ArrowRight' ? -1 : 1; draw(); }
   });
 })();
 
