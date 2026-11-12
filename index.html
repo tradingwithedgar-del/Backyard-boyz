@@ -86,7 +86,18 @@
     </a>
     <nav aria-label="Main">
       <ul class="nav-links">
-        <li><a href="#services">Services</a></li>
+        <li class="nav-menu">
+          <details class="svc-menu">
+            <summary>Services<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <ul class="svc-menu-list">
+              <li><a href="#services">All services</a></li>
+              <li><a href="/auto-window-tint.html">Auto tint</a></li>
+              <li><a href="/home-window-tint.html">Home &amp; commercial tint</a></li>
+              <li><a href="/auto-glass.html">Auto glass</a></li>
+              <li><a href="/headliner-repair.html">Headliners</a></li>
+            </ul>
+          </details>
+        </li>
         <li><a href="#shades">Shades</a></li>
         <li><a href="#how">How it works</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -687,6 +698,7 @@ qForm.addEventListener('submit', async (e) => {
   }
 });
 </script>
+<script src="nav.js" defer></script>
 <script src="https://js.hcaptcha.com/1/api.js?onload=hcapOnload&render=explicit" async defer></script>
 </body>
 </html>

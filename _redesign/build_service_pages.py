@@ -1,4 +1,4 @@
-"""Builds the four service pages from one template.
+"""Builds the four service pages and 404.html from one template.
 
 Run from the repo root:  python3 _redesign/build_service_pages.py
 Edit the copy in PAGES below, then re-run; the .html files are overwritten.
@@ -167,7 +167,7 @@ EXTRAS = {
         </tbody>
       </table>
     </div>
-    <p class="note">A summary, not legal advice. We'll tell you what's legal for your vehicle before we start. <a class="link" href="index.html#shades">Try the shades on our G-wagon →</a></p>
+    <p class="note">A summary, not legal advice. We'll tell you what's legal for your vehicle before we start. <a class="link" href="/#shades">Try the shades on our G-wagon →</a></p>
   </div>
 </section>
 """,
@@ -217,12 +217,12 @@ def shared_parts():
     footer = grab("<footer>", "</footer>")
     mobar = grab('<div class="mobar">', "</div>")
     # anchors on the homepage become links back to it
-    header = header.replace('href="#top"', 'href="index.html"').replace('aria-label="Backyard Boyz Auto LLC, back to top"', 'aria-label="Backyard Boyz Auto LLC, home"')
-    header = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', header)
-    mobar = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', mobar)
-    footer = re.sub(r'href="#(\w+)"', r'href="index.html#\1"', footer)
+    header = header.replace('href="#top"', 'href="/"').replace('aria-label="Backyard Boyz Auto LLC, back to top"', 'aria-label="Backyard Boyz Auto LLC, home"')
+    header = re.sub(r'href="#(\w+)"', r'href="/#\1"', header)
+    mobar = re.sub(r'href="#(\w+)"', r'href="/#\1"', mobar)
+    footer = re.sub(r'href="#(\w+)"', r'href="/#\1"', footer)
     for p in PAGES:  # footer service list links to the pages
-        footer = footer.replace(f'<li><a href="index.html#services">{html.escape(p["nav"])}</a></li>',
+        footer = footer.replace(f'<li><a href="/#services">{html.escape(p["nav"])}</a></li>',
                                 f'<li><a href="{p["file"]}">{html.escape(p["nav"])}</a></li>')
     return head, fonts, header, footer, mobar
 
@@ -237,9 +237,10 @@ def shot(img, cls="shot"):
 def build(page, parts):
     head, fonts, header, footer, mobar = parts
     url = SITE + page["file"]
-    quote = f'index.html?service={page["key"]}#quote'
-    header = header.replace('href="index.html#quote"', f'href="{quote}"')
-    mobar = mobar.replace('href="index.html#quote"', f'href="{quote}"')
+    quote = f'/?service={page["key"]}#quote'
+    header = header.replace('href="/#quote"', f'href="{quote}"')
+    header = header.replace(f'href="/{page["file"]}"', f'href="/{page["file"]}" aria-current="page"')
+    mobar = mobar.replace('href="/#quote"', f'href="{quote}"')
     schema = {
         "@context": "https://schema.org",
         "@graph": [
@@ -311,7 +312,7 @@ def build(page, parts):
 <section class="band band--clear page-hero" aria-labelledby="pageTitle">
   <div class="wrap">
     <div class="hero-copy">
-      <nav class="crumbs mono" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">{html.escape(page["nav"])}</span></nav>
+      <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">{html.escape(page["nav"])}</span></nav>
       <span class="mono eyebrow">{page["eyebrow"]}</span>
       <h1 id="pageTitle">{page["h1"]}</h1>
       <p class="lede">{page["lede"]}</p>
@@ -380,6 +381,64 @@ def build(page, parts):
 {mobar}
 
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="nav.js" defer></script>
+</body>
+</html>
+"""
+
+
+def to_root(markup):
+    """404.html is served at any URL depth, so every local link and asset must start with "/"."""
+    return re.sub(r'(href|src)="(?!/|https?:|tel:|mailto:|#|data:)([^"]+)"', r'\1="/\2"', markup)
+
+
+def build_404(parts):
+    head, fonts, header, footer, mobar = (to_root(x) for x in parts)
+    links = [("/", "Home page", "btn--line")] + [("/" + p["file"], html.escape(p["nav"]), "btn--line") for p in PAGES] + [
+        ("/#quote", "Get a quote", "btn--ink"), (PHONE_TEL, f"Call or text {PHONE}", "btn--line")]
+    items = "\n".join(f'        <li><a class="btn {cls}" href="{href}">{label}</a></li>' for href, label, cls in links)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+{head}
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Page not found | Backyard Boyz Auto LLC</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F3F4F2">
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<link rel="apple-touch-icon" href="/logo.webp">
+{fonts}
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="sr-only skip" href="#main">Skip to content</a>
+
+{header}
+
+<main id="main">
+<section class="band band--clear page-hero not-found" aria-labelledby="nfTitle">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="mono eyebrow">Error 404</span>
+      <h1 id="nfTitle">We couldn't find that page</h1>
+      <p class="lede">The link may be old or mistyped. Try one of these instead.</p>
+      <ul class="nf-links">
+{items}
+      </ul>
+    </div>
+  </div>
+</section>
+</main>
+
+{footer}
+
+{mobar}
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="/nav.js" defer></script>
 </body>
 </html>
 """
@@ -390,3 +449,5 @@ if __name__ == "__main__":
     for p in PAGES:
         open(p["file"], "w", encoding="utf-8").write(build(p, parts))
         print("wrote", p["file"])
+    open("404.html", "w", encoding="utf-8").write(build_404(parts))
+    print("wrote 404.html")
