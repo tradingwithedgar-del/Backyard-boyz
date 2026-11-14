@@ -389,7 +389,10 @@ def build(page, parts):
 
 def to_root(markup):
     """404.html is served at any URL depth, so every local link and asset must start with "/"."""
-    return re.sub(r'(href|src)="(?!/|https?:|tel:|mailto:|#|data:)([^"]+)"', r'\1="/\2"', markup)
+    markup = re.sub(r'(href|src)="(?!/|https?:|tel:|mailto:|#|data:)([^"]+)"', r'\1="/\2"', markup)
+    # srcset holds a comma-separated list of "url descriptor" pairs
+    return re.sub(r'srcset="([^"]+)"', lambda m: 'srcset="' + ", ".join(
+        part if part.startswith(("/", "http")) else "/" + part for part in (x.strip() for x in m.group(1).split(","))) + '"', markup)
 
 
 def build_404(parts):
