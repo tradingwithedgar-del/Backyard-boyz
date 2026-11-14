@@ -81,7 +81,7 @@
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Backyard Boyz Auto LLC, back to top">
-      <img src="logo.webp" alt="" width="44" height="44">
+      <img src="logo-88.webp" srcset="logo-88.webp 1x, logo-192.webp 2x" alt="" width="44" height="44">
       <span><b>Backyard Boyz</b><small>AUTO LLC</small></span>
     </a>
     <nav aria-label="Main">
@@ -224,25 +224,25 @@
         <span class="mono">Auto</span>
         <h3>Auto window tint</h3>
         <p>Cars, trucks and SUVs. Less heat, less glare, more privacy and a cleaner look.</p>
-        <span class="links"><a class="link" href="auto-window-tint.html">Learn more</a><a class="link" href="#quote" data-pick="Auto window tint">Quote this →</a></span>
+        <span class="links"><a class="link" href="auto-window-tint.html">Car window tinting</a><a class="link" href="#quote" data-pick="Auto window tint">Quote this →</a></span>
       </article>
       <article class="svc">
         <span class="mono">Home</span>
         <h3>Home &amp; commercial tint</h3>
         <p>Cooler rooms, less UV on your floors and furniture, and privacy for houses and storefronts.</p>
-        <span class="links"><a class="link" href="home-window-tint.html">Learn more</a><a class="link" href="#quote" data-pick="Home / commercial tint">Quote this →</a></span>
+        <span class="links"><a class="link" href="home-window-tint.html">Home &amp; commercial tint</a><a class="link" href="#quote" data-pick="Home / commercial tint">Quote this →</a></span>
       </article>
       <article class="svc">
         <span class="mono">Glass</span>
         <h3>Auto glass replacement</h3>
         <p>Cracked windshield or busted side glass. We replace it and get you back on the road.</p>
-        <span class="links"><a class="link" href="auto-glass.html">Learn more</a><a class="link" href="#quote" data-pick="Auto glass / replacement">Quote this →</a></span>
+        <span class="links"><a class="link" href="auto-glass.html">Auto glass replacement</a><a class="link" href="#quote" data-pick="Auto glass / replacement">Quote this →</a></span>
       </article>
       <article class="svc">
         <span class="mono">Interior</span>
         <h3>Headliners &amp; interior</h3>
         <p>Sagging headliner falling on your head? We fix that too. Ask what else your ride needs.</p>
-        <span class="links"><a class="link" href="headliner-repair.html">Learn more</a><a class="link" href="#quote" data-pick="Headliner / other">Quote this →</a></span>
+        <span class="links"><a class="link" href="headliner-repair.html">Headliner repair</a><a class="link" href="#quote" data-pick="Headliner / other">Quote this →</a></span>
       </article>
     </div>
   </div>
@@ -495,7 +495,7 @@
 <footer>
   <div class="wrap">
     <div class="f-brand">
-      <img src="logo.webp" alt="Backyard Boyz Auto LLC logo" width="96" height="96" loading="lazy">
+      <img src="logo-192.webp" alt="Backyard Boyz Auto LLC logo" width="96" height="96" loading="lazy">
       <b>Backyard Boyz<br>Auto LLC</b>
     </div>
     <div class="f-cols">
@@ -589,17 +589,33 @@ const GW_WINDOWS = ["M1170 250L1279 249L1289 394L1243 394L1240 378L1222 368L1190
   const N = 36, src = i => 'spin/g' + String(i + 1).padStart(2, '0') + '.webp';
   const stage = document.getElementById('gwStage'), frame = document.getElementById('gwFrame');
   const glassPath = document.getElementById('gwGlassPath'), seats = document.getElementById('gwSeats');
-  let pos = 0, shown = 0, startX = null, startPos = 0;
-  const cache = [];
-  function preload(){ for(let i = 1; i < N; i++){ const im = new Image(); im.src = src(i); cache.push(im); } }
-  if(document.readyState === 'complete') setTimeout(preload, 300); else window.addEventListener('load', () => setTimeout(preload, 300));
-  function draw(){
-    const i = ((Math.round(pos) % N) + N) % N;
+  let pos = 0, shown = 0, wanted = 0, startX = null, startPos = 0;
+  // Only frame 1 loads with the page. Frames 2-36 (~1.1 MB) load on the first sign of interest:
+  // pointer, touch, hover or focus on the stage, or a tap on a shade button.
+  const loaded = [true], cache = [];
+  let fetching = false;
+  function loadFrames(){
+    if(fetching) return;
+    fetching = true;
+    for(let i = 1; i < N; i++){
+      const im = new Image();
+      im.onload = () => { loaded[i] = true; if(i === wanted) show(i); };
+      im.src = src(i); cache.push(im);
+    }
+  }
+  ['pointerdown', 'touchstart', 'mouseenter', 'focus'].forEach(ev => stage.addEventListener(ev, loadFrames, {once:true, passive:true}));
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', loadFrames, {once:true}));
+  function show(i){
     if(i === shown) return;
     frame.setAttribute('href', src(i));
     glassPath.setAttribute('d', GW_WINDOWS[i] || 'M0 0Z');
     seats.style.display = i === 0 ? '' : 'none';
     shown = i;
+  }
+  function draw(){
+    wanted = ((Math.round(pos) % N) + N) % N;
+    // A frame still downloading stays off screen; the last loaded frame (and its tint) holds until it arrives.
+    if(loaded[wanted]) show(wanted);
   }
   stage.addEventListener('pointerdown', e => { startX = e.clientX; startPos = pos; stage.setPointerCapture(e.pointerId); });
   stage.addEventListener('pointermove', e => { if(startX === null) return; pos = startPos - (e.clientX - startX) * N / (stage.clientWidth * 1.4); draw(); });
@@ -612,12 +628,40 @@ const GW_WINDOWS = ["M1170 250L1279 249L1289 394L1243 394L1240 378L1222 368L1190
 
 // ---------- quote flow ----------
 const Q = {svc:null};
-let _hcapReady = false, _hcapId = null;
+let _hcapReady = false, _hcapId = null, _hcapLoading = false, _hcapRendered, _hcapFailed = null;
+const hcapRendered = new Promise(r => { _hcapRendered = r; });
 window.hcapOnload = function(){ _hcapReady = true; renderHcap(); };
 function renderHcap(){
   if(_hcapReady && _hcapId === null && window.hcaptcha && HCAPTCHA_SITE_KEY && !document.getElementById('qForm').hidden){
-    try{ _hcapId = window.hcaptcha.render('hcap', {sitekey:HCAPTCHA_SITE_KEY, theme:'light'}); }catch(e){}
+    try{ _hcapId = window.hcaptcha.render('hcap', {sitekey:HCAPTCHA_SITE_KEY, theme:'light'}); _hcapRendered(); }catch(e){}
   }
+}
+// The hCaptcha script loads only once the quote form is used or about to scroll into view.
+function loadHcap(){
+  if(_hcapLoading || !HCAPTCHA_SITE_KEY) return;
+  _hcapLoading = true;
+  const sc = document.createElement('script');
+  sc.src = 'https://js.hcaptcha.com/1/api.js?onload=hcapOnload&render=explicit';
+  sc.async = true; sc.defer = true;
+  // If the download fails, allow the next attempt (a retried submit) to inject the script again.
+  sc.onerror = () => { _hcapLoading = false; sc.remove(); if(_hcapFailed) _hcapFailed(); };
+  document.body.appendChild(sc);
+}
+(function(){
+  const card = document.querySelector('.q-card');
+  card.addEventListener('focusin', loadHcap, {once:true});
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries => {
+      if(entries.some(en => en.isIntersecting)){ loadHcap(); io.disconnect(); }
+    }, {rootMargin:'400px 0px'});
+    io.observe(card);
+  } else { loadHcap(); }
+})();
+function waitForHcap(ms){
+  // Resolves true once the widget is rendered, false on timeout or if the script fails to download.
+  const failed = new Promise(r => { _hcapFailed = () => r(false); });
+  loadHcap(); renderHcap();
+  return Promise.race([hcapRendered.then(() => true), failed, new Promise(r => setTimeout(() => r(false), ms))]);
 }
 function qStep(n){
   document.querySelectorAll('.qpanel').forEach(p => p.hidden = (+p.dataset.panel !== n));
@@ -662,9 +706,24 @@ qForm.addEventListener('submit', async (e) => {
   if(!name || !phone){ showError('Add your name and cell number so we can text your quote.'); return; }
   if(phone.replace(/\D/g,'').length < 10){ showError('That cell number looks short. Include the area code.'); return; }
   const sending = !!WEB3FORMS_ACCESS_KEY;
+  if(sending && HCAPTCHA_SITE_KEY && _hcapId === null){
+    // Submitted before the spam check finished loading: wait for it instead of sending without a token.
+    qSubmitBtn.disabled = true; qSubmitBtn.textContent = 'Loading the spam check…';
+    const ready = await waitForHcap(15000);
+    qSubmitBtn.disabled = false; qSubmitBtn.textContent = 'Send & get my quote';
+    if(!ready){
+      // Never send without a token: say so, give the phone number, and leave the button ready for a retry.
+      qError.textContent = 'Couldn\'t load the spam check. Call or text ';
+      const call = document.createElement('a');
+      call.href = 'tel:+18328596786'; call.textContent = '(832) 859-6786';
+      qError.append(call, '.');
+      qError.hidden = false;
+      return;
+    }
+  }
   let token = '';
   if(_hcapId !== null && window.hcaptcha){ token = window.hcaptcha.getResponse(_hcapId); }
-  if(sending && _hcapId !== null && !token){ showError('Tick the "I am human" box first, then send.'); return; }
+  if(sending && HCAPTCHA_SITE_KEY && !token){ showError('Tick the "I am human" box first, then send.'); return; }
   const first = name.split(' ')[0];
   document.getElementById('qDoneTitle').textContent = 'Got it, ' + first + '.';
   document.getElementById('qMsg').textContent = 'Hector or Adrian will text your quote to ' + phone + '. If it\'s urgent, call or text ' + PHONE + '.';
@@ -699,6 +758,5 @@ qForm.addEventListener('submit', async (e) => {
 });
 </script>
 <script src="nav.js" defer></script>
-<script src="https://js.hcaptcha.com/1/api.js?onload=hcapOnload&render=explicit" async defer></script>
 </body>
 </html>

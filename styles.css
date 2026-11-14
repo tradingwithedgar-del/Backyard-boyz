@@ -203,6 +203,7 @@ p{margin:0;}
 .form-note{font-size:13px;color:var(--ink-2);line-height:1.45;}
 .form-note a{color:var(--gold-ink);}
 .form-error{background:#F6E7DC;color:var(--warn);border-radius:var(--r);padding:10px 12px;font-size:14px;font-weight:500;}
+.form-error a{color:inherit;font-weight:600;text-decoration:underline;text-underline-offset:2px;}
 .panel-nav{display:flex;gap:var(--s-3);align-items:center;margin-top:var(--s-2);}
 .panel-nav .btn{flex:2;}
 .back{background:none;border:none;color:var(--ink-2);font-family:var(--f-body);font-weight:500;font-size:15px;cursor:pointer;padding:12px 4px;min-height:44px;}
