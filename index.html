@@ -628,7 +628,7 @@ const GW_WINDOWS = ["M1170 250L1279 249L1289 394L1243 394L1240 378L1222 368L1190
 
 // ---------- quote flow ----------
 const Q = {svc:null};
-let _hcapReady = false, _hcapId = null, _hcapLoading = false, _hcapRendered;
+let _hcapReady = false, _hcapId = null, _hcapLoading = false, _hcapRendered, _hcapFailed = null;
 const hcapRendered = new Promise(r => { _hcapRendered = r; });
 window.hcapOnload = function(){ _hcapReady = true; renderHcap(); };
 function renderHcap(){
@@ -643,6 +643,8 @@ function loadHcap(){
   const sc = document.createElement('script');
   sc.src = 'https://js.hcaptcha.com/1/api.js?onload=hcapOnload&render=explicit';
   sc.async = true; sc.defer = true;
+  // If the download fails, allow the next attempt (a retried submit) to inject the script again.
+  sc.onerror = () => { _hcapLoading = false; sc.remove(); if(_hcapFailed) _hcapFailed(); };
   document.body.appendChild(sc);
 }
 (function(){
@@ -656,8 +658,10 @@ function loadHcap(){
   } else { loadHcap(); }
 })();
 function waitForHcap(ms){
+  // Resolves true once the widget is rendered, false on timeout or if the script fails to download.
+  const failed = new Promise(r => { _hcapFailed = () => r(false); });
   loadHcap(); renderHcap();
-  return Promise.race([hcapRendered.then(() => true), new Promise(r => setTimeout(() => r(false), ms))]);
+  return Promise.race([hcapRendered.then(() => true), failed, new Promise(r => setTimeout(() => r(false), ms))]);
 }
 function qStep(n){
   document.querySelectorAll('.qpanel').forEach(p => p.hidden = (+p.dataset.panel !== n));
@@ -707,7 +711,15 @@ qForm.addEventListener('submit', async (e) => {
     qSubmitBtn.disabled = true; qSubmitBtn.textContent = 'Loading the spam check…';
     const ready = await waitForHcap(15000);
     qSubmitBtn.disabled = false; qSubmitBtn.textContent = 'Send & get my quote';
-    if(!ready){ showError('The spam check didn\'t load. Check your connection, or call or text us at ' + PHONE + '.'); return; }
+    if(!ready){
+      // Never send without a token: say so, give the phone number, and leave the button ready for a retry.
+      qError.textContent = 'Couldn\'t load the spam check. Call or text ';
+      const call = document.createElement('a');
+      call.href = 'tel:+18328596786'; call.textContent = '(832) 859-6786';
+      qError.append(call, '.');
+      qError.hidden = false;
+      return;
+    }
   }
   let token = '';
   if(_hcapId !== null && window.hcaptcha){ token = window.hcaptcha.getResponse(_hcapId); }
