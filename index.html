@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data: https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://*.hcaptcha.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; connect-src https://api.web3forms.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://hcaptcha.com https://*.hcaptcha.com; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data: https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://*.hcaptcha.com; font-src 'self'; script-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; connect-src https://api.web3forms.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://hcaptcha.com https://*.hcaptcha.com; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Window Tinting in Cypress &amp; Houston, TX | Backyard Boyz Auto LLC</title>
 <meta name="description" content="Window tinting for cars, homes and businesses, plus auto glass and headliners in Cypress and Houston, TX. Shop or mobile. Get your quote by text.">
@@ -15,6 +15,7 @@
 <meta name="geo.placename" content="Cypress, Houston">
 <meta name="author" content="Backyard Boyz Auto LLC">
 <link rel="icon" type="image/webp" href="favicon.webp">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="apple-touch-icon" href="logo.webp">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Backyard Boyz Auto LLC · Window Tinting in Cypress &amp; Houston">
@@ -29,9 +30,7 @@
 <meta name="twitter:title" content="Backyard Boyz Auto LLC · Window Tinting in Cypress &amp; Houston">
 <meta name="twitter:description" content="Auto and home tint, auto glass and headliners. Shop in Cypress or mobile across Houston.">
 <meta name="twitter:image" content="https://backyardboyzautollc.com/og-image.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=IBM+Plex+Mono:wght@500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
 {
@@ -305,25 +304,25 @@
     <!-- Real job photos. To add or swap one, see the note in the CSS above .work-grid. -->
     <div class="work-grid">
       <figure class="shot shot--feat">
-        <img src="work/mustang-windshield-install.webp" alt="White classic Mustang in the shop with its new windshield taped in place" width="701" height="1200" loading="lazy">
+        <img src="work/mustang-windshield-install.webp" srcset="work/mustang-windshield-install-400.webp 400w, work/mustang-windshield-install.webp 701w" sizes="(min-width: 1160px) 368px, (min-width: 600px) calc((100vw - 56px) / 3), calc(100vw - 40px)" alt="White classic Mustang in the shop with its new windshield taped in place" width="701" height="1200" loading="lazy">
         <figcaption><span class="mono">Glass · in the shop</span>Windshield install on a classic Mustang</figcaption>
       </figure>
       <figure class="shot">
         <span class="shot-tag mono">Before</span>
-        <img src="work/broken-door-glass.webp" alt="Before: gray Toyota with the rear door glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 86%">
+        <img src="work/broken-door-glass.webp" srcset="work/broken-door-glass-400.webp 400w, work/broken-door-glass.webp 774w" sizes="(min-width: 1160px) 368px, (min-width: 600px) calc((100vw - 56px) / 3), calc((100vw - 48px) / 2)" alt="Before: gray Toyota with the rear door glass shattered on the ground below it" width="774" height="1200" loading="lazy" style="object-position:50% 86%">
         <figcaption><span class="mono">Glass · before</span>Busted rear door glass on a Toyota</figcaption>
       </figure>
       <figure class="shot">
         <span class="shot-tag shot-tag--after mono">After</span>
-        <img src="work/toyota-rear-window-tint.webp" alt="After: the same gray Toyota with new rear door glass, tinted dark" width="905" height="1200" loading="lazy" style="object-position:55% 50%">
+        <img src="work/toyota-rear-window-tint.webp" srcset="work/toyota-rear-window-tint-400.webp 400w, work/toyota-rear-window-tint-800.webp 800w, work/toyota-rear-window-tint.webp 905w" sizes="(min-width: 1160px) 368px, (min-width: 600px) calc((100vw - 56px) / 3), calc((100vw - 48px) / 2)" alt="After: the same gray Toyota with new rear door glass, tinted dark" width="905" height="1200" loading="lazy" style="object-position:55% 50%">
         <figcaption><span class="mono">Glass + tint · after</span>Same door: new glass in and tinted</figcaption>
       </figure>
       <figure class="shot">
-        <img src="work/home-window-film.webp" alt="House window mid-job: bubbled old film on the left panes, clean glass on the right" width="903" height="1200" loading="lazy">
+        <img src="work/home-window-film.webp" srcset="work/home-window-film-400.webp 400w, work/home-window-film-800.webp 800w, work/home-window-film.webp 903w" sizes="(min-width: 1160px) 368px, (min-width: 600px) calc((100vw - 56px) / 3), calc((100vw - 48px) / 2)" alt="House window mid-job: bubbled old film on the left panes, clean glass on the right" width="903" height="1200" loading="lazy">
         <figcaption><span class="mono">Home</span>Bubbled old film coming off</figcaption>
       </figure>
       <figure class="shot">
-        <img src="work/headliner-removed.webp" alt="Worn-out headliner board with the fabric falling apart, pulled out of a car" width="898" height="1200" loading="lazy" style="object-position:50% 65%">
+        <img src="work/headliner-removed.webp" srcset="work/headliner-removed-400.webp 400w, work/headliner-removed-800.webp 800w, work/headliner-removed.webp 898w" sizes="(min-width: 1160px) 368px, (min-width: 600px) calc((100vw - 56px) / 3), calc((100vw - 48px) / 2)" alt="Worn-out headliner board with the fabric falling apart, pulled out of a car" width="898" height="1200" loading="lazy" style="object-position:50% 65%">
         <figcaption><span class="mono">Interior</span>Worn-out headliner, pulled for new fabric</figcaption>
       </figure>
     </div>

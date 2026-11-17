@@ -1,3 +1,13 @@
+/* ---------- fonts ----------
+   Self-hosted latin subsets of the Google Fonts files (SIL OFL 1.1, licences in /fonts/).
+   Big Shoulders Display and Instrument Sans are variable fonts, so one file serves every weight listed. */
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/big-shoulders-display-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:900;font-display:swap;src:url(fonts/big-shoulders-display-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'IBM Plex Mono';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ibm-plex-mono-500-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/instrument-sans-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/instrument-sans-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Instrument Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/instrument-sans-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
 /* Layout concept: a tint shade card. Bands step from clear glass (VLT 70%) down to limo black (VLT 5%) as you scroll.
    Full spec lives in _redesign/02-design-system.md */
 :root{
@@ -328,3 +338,15 @@ footer .wrap{display:grid;gap:var(--s-6);}
 /* ---------- 404 ---------- */
 .not-found .wrap{display:block;}
 .nf-links{list-style:none;margin:var(--s-3) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s-3);}
+
+/* ---------- privacy policy ---------- */
+.policy-body{max-width:68ch;}
+.policy-body h1{font-size:var(--t-h2);margin-bottom:var(--s-3);}
+.policy-body .updated{font-family:var(--f-mono);font-weight:500;font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2);margin-bottom:var(--s-6);}
+.policy-body h2{font-size:var(--t-h3);margin:var(--s-7) 0 var(--s-3);}
+.policy-body p{margin:0 0 var(--s-4);color:var(--ink-2);}
+.policy-body ul{margin:0 0 var(--s-4);padding-left:22px;color:var(--ink-2);}
+.policy-body li{margin-bottom:6px;}
+.policy-body b{color:var(--ink);font-weight:600;}
+.policy-body a{color:var(--gold-ink);font-weight:500;text-decoration:underline;text-underline-offset:2px;}
+.policy-body .contact{background:var(--haze);border:1px solid var(--line);border-radius:var(--r);padding:var(--s-5);line-height:1.8;}

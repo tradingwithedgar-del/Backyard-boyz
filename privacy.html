@@ -3,56 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; frame-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data: https://*.hcaptcha.com; style-src 'self' 'unsafe-inline' https://*.hcaptcha.com; font-src 'self'; script-src 'self' 'unsafe-inline' https://hcaptcha.com https://*.hcaptcha.com; connect-src https://api.web3forms.com https://hcaptcha.com https://*.hcaptcha.com; frame-src https://hcaptcha.com https://*.hcaptcha.com; form-action 'self' https://api.web3forms.com; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="robots" content="index, follow">
 <title>Privacy Policy · Backyard Boyz Auto LLC</title>
 <meta name="description" content="How Backyard Boyz Auto LLC collects and uses the information you submit through our website.">
 <link rel="canonical" href="https://backyardboyzautollc.com/privacy.html">
+<meta name="theme-color" content="#F3F4F2">
 <link rel="icon" type="image/webp" href="favicon.webp">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="apple-touch-icon" href="logo.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  color-scheme:only dark;
-  --bg:#0b0b0e; --panel:#151519; --ink:#F3F1EA; --muted:#9b9aa3;
-  --gold:#C9AE6A; --gold-2:#E6D093; --line:rgba(255,255,255,.09);
-  --head:"Oswald",sans-serif; --body:"Inter",system-ui,-apple-system,sans-serif;
-}
-*{box-sizing:border-box;}
-html{background:var(--bg);-webkit-text-size-adjust:100%;}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;}
-a{color:var(--gold);text-decoration:none;}
-a:hover{text-decoration:underline;}
-.topbar{position:sticky;top:0;background:rgba(11,11,14,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
-.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:820px;margin:0 auto;padding:11px 20px;}
-.brand{display:flex;align-items:center;gap:10px;font-family:var(--head);text-transform:uppercase;letter-spacing:.08em;font-weight:600;font-size:14px;color:var(--ink);}
-.brand img{width:34px;height:34px;object-fit:contain;}
-.back{font-family:var(--head);text-transform:uppercase;letter-spacing:.06em;font-size:12px;border:1.5px solid rgba(255,255,255,.22);padding:9px 14px;border-radius:8px;color:var(--ink);}
-.back:hover{border-color:var(--gold);color:var(--gold);text-decoration:none;}
-main{max-width:760px;margin:0 auto;padding:40px 20px 70px;}
-h1{font-family:var(--head);text-transform:uppercase;font-weight:600;font-size:clamp(28px,7vw,42px);margin:0 0 6px;letter-spacing:.01em;}
-.updated{font-family:var(--head);text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:var(--muted);margin:0 0 30px;}
-h2{font-family:var(--head);text-transform:uppercase;letter-spacing:.03em;font-weight:600;font-size:20px;margin:34px 0 10px;color:var(--gold-2);}
-p{margin:0 0 14px;color:#dedcd3;}
-ul{margin:0 0 14px;padding-left:20px;color:#dedcd3;}
-li{margin-bottom:7px;}
-.contact{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:10px;}
-.contact b{font-family:var(--head);text-transform:uppercase;letter-spacing:.03em;}
-footer{border-top:1px solid var(--line);text-align:center;padding:26px 20px 40px;color:var(--muted);font-family:var(--head);text-transform:uppercase;letter-spacing:.1em;font-size:12px;}
-:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
-</style>
+<link rel="preload" href="fonts/big-shoulders-display-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="topbar"><div class="topbar-in">
-  <span class="brand"><img src="logo-88.webp" srcset="logo-88.webp 1x, logo-192.webp 2x" alt="">Backyard Boyz</span>
-  <a class="back" href="/">‹ Back to site</a>
-</div></div>
+<a class="sr-only skip" href="#main">Skip to content</a>
 
-<main>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Backyard Boyz Auto LLC, home">
+      <img src="logo-88.webp" srcset="logo-88.webp 1x, logo-192.webp 2x" alt="" width="44" height="44">
+      <span><b>Backyard Boyz</b><small>AUTO LLC</small></span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li class="nav-menu">
+          <details class="svc-menu">
+            <summary>Services<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <ul class="svc-menu-list">
+              <li><a href="/#services">All services</a></li>
+              <li><a href="/auto-window-tint.html">Auto tint</a></li>
+              <li><a href="/home-window-tint.html">Home &amp; commercial tint</a></li>
+              <li><a href="/auto-glass.html">Auto glass</a></li>
+              <li><a href="/headliner-repair.html">Headliners</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a href="/#shades">Shades</a></li>
+        <li><a href="/#how">How it works</a></li>
+        <li><a href="/#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn--line" href="/#quote">Get a quote</a>
+      <a class="btn btn--ink" href="tel:+18328596786"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.5 2.1L8.1 10a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c1 .3 2 .6 3 .7a2 2 0 0 1 1.7 2z"/></svg>Call</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="band band--clear policy">
+<div class="wrap">
+<div class="policy-body">
+<!-- policy:start -->
   <h1>Privacy Policy</h1>
   <p class="updated">Last updated: August 4, 2026</p>
 
@@ -95,8 +98,58 @@ footer{border-top:1px solid var(--line);text-align:center;padding:26px 20px 40px
 
   <h2>Changes to this policy</h2>
   <p>If we change how we handle information, we'll update this page and the "last updated" date above.</p>
+<!-- policy:end -->
+</div>
+</div>
 </main>
 
-<footer>Backyard Boyz Auto LLC · Houston, TX</footer>
+<footer>
+  <div class="wrap">
+    <div class="f-brand">
+      <img src="logo-192.webp" alt="Backyard Boyz Auto LLC logo" width="96" height="96" loading="lazy">
+      <b>Backyard Boyz<br>Auto LLC</b>
+    </div>
+    <div class="f-cols">
+      <div>
+        <h3>CONTACT</h3>
+        <ul>
+          <li><a href="tel:+18328596786">(832) 859-6786</a></li>
+          <li><a href="mailto:llcbackyardboyz@gmail.com">llcbackyardboyz@gmail.com</a></li>
+          <li><a href="https://instagram.com/backyardd.boyzz" target="_blank" rel="noopener">@backyardd.boyzz</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>WHERE</h3>
+        <ul>
+          <li>Shop in Cypress, TX</li>
+          <li>Mobile across Houston</li>
+          <li class="f-area">Katy · Jersey&nbsp;Village · Tomball · The&nbsp;Woodlands · Spring · Pasadena · Humble · Kingwood · Friendswood · Missouri&nbsp;City · Bellaire · Stafford · Cloverleaf</li>
+        </ul>
+      </div>
+      <div>
+        <h3>SERVICES</h3>
+        <ul>
+          <li><a href="auto-window-tint.html">Auto window tint</a></li>
+          <li><a href="home-window-tint.html">Home &amp; commercial tint</a></li>
+          <li><a href="auto-glass.html">Auto glass</a></li>
+          <li><a href="headliner-repair.html">Headliners</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-legal">
+      <span>© <span id="yr">2026</span> Backyard Boyz Auto LLC</span>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://grandnashstudio.com">Site by Grand Nash Studio</a>
+    </div>
+  </div>
+</footer>
+
+<div class="mobar">
+  <a class="btn btn--line" href="tel:+18328596786">Call now</a>
+  <a class="btn btn--gold" href="/#quote">Get a quote</a>
+</div>
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="nav.js" defer></script>
 </body>
 </html>

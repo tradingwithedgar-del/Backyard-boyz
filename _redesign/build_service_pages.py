@@ -1,4 +1,4 @@
-"""Builds the four service pages and 404.html from one template.
+"""Builds the four service pages, privacy.html and 404.html from one template.
 
 Run from the repo root:  python3 _redesign/build_service_pages.py
 Edit the copy in PAGES below, then re-run; the .html files are overwritten.
@@ -7,6 +7,7 @@ Nothing here invents facts: no prices, film brands, warranties or job times
 until Hector & Adrian confirm them.
 """
 import html
+import os
 import json
 import re
 
@@ -212,7 +213,7 @@ def shared_parts():
         return s[i:s.index(b, i) + len(b)]
 
     head = grab('<meta http-equiv="Content-Security-Policy"', ">")
-    fonts = grab('<link rel="preconnect" href="https://fonts.googleapis.com">', 'display=swap" rel="stylesheet">')
+    fonts = grab('<link rel="preload" href="fonts/', ">")  # self-hosted heading font (see styles.css @font-face)
     header = grab('<header class="nav">', "</header>")
     footer = grab("<footer>", "</footer>")
     mobar = grab('<div class="mobar">', "</div>")
@@ -227,10 +228,24 @@ def shared_parts():
     return head, fonts, header, footer, mobar
 
 
-def shot(img, cls="shot"):
+# Displayed widths come from styles.css: .wrap is the viewport minus 40px, capped at 1120px of content.
+# Hero photo: one column under 900px; at 900px+ the 1fr column of "1.25fr 1fr" with a 64px gap.
+SIZES_HERO = "(min-width: 1160px) 470px, (min-width: 900px) calc((100vw - 104px) / 2.25), calc(100vw - 40px)"
+# Before/after pair: two columns with an 8px gap inside a 900px max-width box.
+SIZES_PAIR = "(min-width: 940px) 446px, calc((100vw - 48px) / 2)"
+
+
+def srcset(src, w):
+    """List the -400/-800 variants that exist next to the photo, plus the original at its own width."""
+    base = src[:-len(".webp")]
+    parts = [f"{base}-{tw}.webp {tw}w" for tw in (400, 800) if os.path.exists(f"{base}-{tw}.webp")]
+    return ", ".join(parts + [f"{src} {w}w"])
+
+
+def shot(img, cls="shot", sizes=SIZES_PAIR):
     src, w, h, alt, cap, *pos = img
     style = f' style="object-position:{pos[0]}"' if pos else ""
-    return (f'<figure class="{cls}">\n        <img src="{src}" alt="{alt}" width="{w}" height="{h}" loading="lazy"{style}>\n'
+    return (f'<figure class="{cls}">\n        <img src="{src}" srcset="{srcset(src, w)}" sizes="{sizes}" alt="{alt}" width="{w}" height="{h}" loading="lazy"{style}>\n'
             f'        <figcaption>{cap}</figcaption>\n      </figure>')
 
 
@@ -288,6 +303,7 @@ def build(page, parts):
 <meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="theme-color" content="#F3F4F2">
 <link rel="icon" type="image/webp" href="favicon.webp">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="apple-touch-icon" href="logo.webp">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{html.escape(page["title"])}">
@@ -321,7 +337,7 @@ def build(page, parts):
         <a class="btn btn--line" href="{PHONE_TEL}">{CALL_ICON}Call or text {PHONE}</a>
       </div>
     </div>
-    {shot(page["hero_img"], "shot page-shot")}
+    {shot(page["hero_img"], "shot page-shot", SIZES_HERO)}
   </div>
 </section>
 
@@ -412,6 +428,7 @@ def build_404(parts):
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#F3F4F2">
 <link rel="icon" type="image/webp" href="/favicon.webp">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
 <link rel="apple-touch-icon" href="/logo.webp">
 {fonts}
 <link rel="stylesheet" href="/styles.css">
@@ -447,6 +464,61 @@ def build_404(parts):
 """
 
 
+def policy_text():
+    """The policy wording lives in privacy.html itself, between the policy markers, and is copied verbatim.
+    The first run (old dark page) has no markers yet, so it takes everything inside <main>."""
+    s = open("privacy.html", encoding="utf-8").read()
+    m = re.search(r"<!-- policy:start -->\n(.*?)\n<!-- policy:end -->", s, re.S) or re.search(r"<main[^>]*>\n?(.*?)\n?</main>", s, re.S)
+    return m.group(1)
+
+
+def build_privacy(parts):
+    head, fonts, header, footer, mobar = parts
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+{head}
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
+<title>Privacy Policy · Backyard Boyz Auto LLC</title>
+<meta name="description" content="How Backyard Boyz Auto LLC collects and uses the information you submit through our website.">
+<link rel="canonical" href="https://backyardboyzautollc.com/privacy.html">
+<meta name="theme-color" content="#F3F4F2">
+<link rel="icon" type="image/webp" href="favicon.webp">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
+<link rel="apple-touch-icon" href="logo.webp">
+{fonts}
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="sr-only skip" href="#main">Skip to content</a>
+
+{header}
+
+<main id="main" class="band band--clear policy">
+<div class="wrap">
+<div class="policy-body">
+<!-- policy:start -->
+{policy_text()}
+<!-- policy:end -->
+</div>
+</div>
+</main>
+
+{footer}
+
+{mobar}
+
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+<script src="nav.js" defer></script>
+</body>
+</html>
+"""
+
+
 if __name__ == "__main__":
     parts = shared_parts()
     for p in PAGES:
@@ -454,3 +526,6 @@ if __name__ == "__main__":
         print("wrote", p["file"])
     open("404.html", "w", encoding="utf-8").write(build_404(parts))
     print("wrote 404.html")
+    privacy = build_privacy(parts)  # reads the policy text from privacy.html, so build it before overwriting
+    open("privacy.html", "w", encoding="utf-8").write(privacy)
+    print("wrote privacy.html")
