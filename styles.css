@@ -79,7 +79,7 @@ p{margin:0;}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .brand img{width:44px;height:44px;object-fit:contain;}
 .brand b{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:20px;line-height:.95;letter-spacing:.01em;}
-.brand small{display:block;font-family:var(--f-mono);font-weight:500;font-size:10px;letter-spacing:.16em;color:var(--ink-2);}
+.brand small{display:block;font-family:var(--f-mono);font-weight:500;font-size:12px;letter-spacing:.16em;color:var(--ink-2);}
 .nav-links{display:flex;align-items:center;gap:var(--s-5);list-style:none;margin:0;padding:0;}
 .nav-links > li > a{display:inline-flex;align-items:center;min-height:44px;text-decoration:none;font-weight:500;font-size:15px;border-bottom:2px solid transparent;transition:border-color .15s;}
 .nav-links > li > a:hover{border-color:var(--gold);}
@@ -117,12 +117,12 @@ p{margin:0;}
 .gw-stage{position:relative;overflow:hidden;border-radius:var(--r);background:#0B0B0C;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
 .gw-stage:active{cursor:grabbing;}
 .gw-turn svg{display:block;width:100%;height:auto;}
-.gw-hint{position:absolute;left:var(--s-2);bottom:var(--s-2);display:inline-flex;align-items:center;gap:6px;background:rgba(14,15,16,.7);color:var(--paper);padding:5px 9px;border-radius:var(--r);font-size:11px;pointer-events:none;}
+.gw-hint{position:absolute;left:var(--s-2);bottom:var(--s-2);display:inline-flex;align-items:center;gap:6px;background:rgba(14,15,16,.7);color:var(--paper);padding:5px 9px;border-radius:var(--r);font-size:12px;pointer-events:none;}
 .gw-hint svg{width:14px;height:14px;}
 .chips{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;}
 .chip{appearance:none;border:1.5px solid var(--line);background:var(--clear);border-radius:999px;min-height:48px;padding:6px 2px;cursor:pointer;font-family:var(--f-mono);font-weight:500;font-size:13px;color:var(--ink);display:grid;place-items:center;transition:border-color .15s,background-color .15s;}
 .chip i{display:block;width:22px;height:8px;border-radius:999px;border:1px solid var(--line);margin-bottom:3px;}
-.chip span{display:block;font-family:var(--f-body);font-size:11px;font-weight:500;color:var(--ink-2);line-height:1.1;}
+.chip span{display:block;font-family:var(--f-body);font-size:12px;font-weight:500;color:var(--ink-2);line-height:1.1;}
 .chip:hover{border-color:var(--ink);}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--clear);}
 .chip[aria-pressed="true"] span{color:var(--paper-2);}
@@ -172,8 +172,8 @@ p{margin:0;}
 .shot--feat{grid-column:span 2;}
 .shot--feat img{aspect-ratio:auto;} /* the featured photo shows uncropped */
 .shot figcaption{position:absolute;left:0;right:0;bottom:0;display:grid;gap:2px;padding:var(--s-6) var(--s-3) var(--s-3);background:linear-gradient(to top,rgba(14,15,16,.88),rgba(14,15,16,.6) 55%,transparent);color:var(--paper);font-size:14px;font-weight:500;line-height:1.3;}
-.shot figcaption .mono{font-size:11px;color:var(--gold);}
-.shot-tag{position:absolute;top:var(--s-2);left:var(--s-2);z-index:1;background:var(--paper);color:var(--ink);padding:4px 8px;border-radius:var(--r);font-size:11px;}
+.shot figcaption .mono{font-size:12px;color:var(--gold);}
+.shot-tag{position:absolute;top:var(--s-2);left:var(--s-2);z-index:1;background:var(--paper);color:var(--ink);padding:4px 8px;border-radius:var(--r);font-size:12px;}
 .shot-tag--after{background:var(--gold);}
 
 /* ---------- testimonials ---------- */
@@ -252,7 +252,7 @@ footer .wrap{display:grid;gap:var(--s-6);}
 .f-cols ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;}
 .f-cols a{text-decoration:none;color:var(--paper);}
 .f-cols a:hover{color:var(--gold);text-decoration:underline;}
-.f-legal{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5);border-top:1px solid var(--line-d);padding-top:var(--s-5);}
+.f-legal{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s-2) var(--s-5);border-top:1px solid var(--line-d);padding-top:var(--s-5);}
 .f-legal a{color:var(--paper-2);}
 
 /* ---------- sticky mobile bar ---------- */
@@ -350,3 +350,11 @@ footer .wrap{display:grid;gap:var(--s-6);}
 .policy-body b{color:var(--ink);font-weight:600;}
 .policy-body a{color:var(--gold-ink);font-weight:500;text-decoration:underline;text-underline-offset:2px;}
 .policy-body .contact{background:var(--haze);border:1px solid var(--line);border-radius:var(--r);padding:var(--s-5);line-height:1.8;}
+
+/* ---------- tap targets ----------
+   Footer links get a 44px-tall tap area; text links elsewhere get vertical padding so their tap area is at
+   least 24px without moving the text (padding on an inline link does not change the line height). */
+.f-cols a,.f-legal a{display:inline-flex;align-items:center;min-height:44px;}
+.f-cols ul:has(a){gap:0;} /* link lists: the 44px rows already space the links */
+.link,.policy-body a,.faq .a a,.form-error a{padding-block:4px;}
+.crumbs a,.form-note a{padding-block:6px;}

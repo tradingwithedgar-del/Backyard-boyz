@@ -10,10 +10,13 @@ import html
 import os
 import json
 import re
+import subprocess
+from datetime import datetime, timezone
 
 SITE = "https://backyardboyzautollc.com/"
 PHONE_TEL = "tel:+18328596786"
 PHONE = "(832) 859-6786"
+OG_IMAGE_ALT = "Backyard Boyz Auto LLC, window tinting in Houston"  # same shared image as the homepage
 
 # Service area: shop in Cypress, mobile to the rest. Keep in sync with the homepage "Where we work" section.
 CITIES = ["Cypress", "Houston", "Katy", "Jersey Village", "Tomball", "The Woodlands", "Spring", "Pasadena", "Humble", "Kingwood", "Friendswood", "Missouri City", "Bellaire", "Stafford", "Cloverleaf"]
@@ -37,7 +40,8 @@ PAGES = [
         "file": "auto-window-tint.html",
         "key": "tint",
         "nav": "Auto window tint",
-        "title": "Car Window Tinting in Cypress & Houston, TX | Backyard Boyz Auto LLC",
+        "title": "Car Window Tinting in Cypress & Houston, TX | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Car Window Tinting in Cypress & Houston, TX | Backyard Boyz Auto LLC",
         "desc": "Car, truck and SUV window tinting in Cypress and Houston. Texas-legal shades, shop or mobile, from Hector and Adrian. Get your quote by text.",
         "service_type": "Automotive window tinting",
         "eyebrow": "Auto window tint · Cypress & Houston",
@@ -67,7 +71,8 @@ PAGES = [
         "file": "home-window-tint.html",
         "key": "home",
         "nav": "Home & commercial tint",
-        "title": "Home & Business Window Tinting in Houston | Backyard Boyz Auto LLC",
+        "title": "Home & Business Window Tinting in Houston | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Home & Business Window Tinting in Houston | Backyard Boyz Auto LLC",
         "desc": "Home and business window tinting in Houston and Cypress. Cooler rooms, less UV and glare, more privacy. We come to you. Get your quote by text.",
         "service_type": "Residential and commercial window film",
         "eyebrow": "Home & commercial tint · Houston",
@@ -95,7 +100,8 @@ PAGES = [
         "file": "auto-glass.html",
         "key": "glass",
         "nav": "Auto glass",
-        "title": "Auto Glass Replacement in Cypress & Houston | Backyard Boyz Auto LLC",
+        "title": "Auto Glass Replacement in Cypress & Houston | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Auto Glass Replacement in Cypress & Houston | Backyard Boyz Auto LLC",
         "desc": "Cracked windshield or busted side glass? Auto glass replacement in Cypress and Houston, at our shop or where your car is. Get your quote by text.",
         "service_type": "Windshield and auto glass replacement",
         "eyebrow": "Auto glass · Cypress & Houston",
@@ -123,7 +129,8 @@ PAGES = [
         "file": "headliner-repair.html",
         "key": "headliner",
         "nav": "Headliners",
-        "title": "Headliner Repair & Replacement in Houston, TX | Backyard Boyz Auto LLC",
+        "title": "Headliner Repair & Replacement in Houston, TX | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Headliner Repair & Replacement in Houston, TX | Backyard Boyz Auto LLC",
         "desc": "Sagging or falling headliner? Headliner repair and replacement in Houston and Cypress, shop or mobile. Get your quote by text.",
         "service_type": "Car headliner repair and replacement",
         "eyebrow": "Headliners · Houston & Cypress",
@@ -306,12 +313,18 @@ def build(page, parts):
 <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="apple-touch-icon" href="logo.webp">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{html.escape(page["title"])}">
+<meta property="og:title" content="{html.escape(page["share_title"])}">
 <meta property="og:description" content="{html.escape(page["desc"])}">
 <meta property="og:site_name" content="Backyard Boyz Auto LLC">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{SITE}og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{OG_IMAGE_ALT}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{html.escape(page["share_title"])}">
+<meta name="twitter:description" content="{html.escape(page["desc"])}">
+<meta name="twitter:image" content="{SITE}og-image.jpg">
 {fonts}
 <link rel="stylesheet" href="styles.css">
 <script type="application/ld+json">
@@ -487,6 +500,19 @@ def build_privacy(parts):
 <meta name="description" content="How Backyard Boyz Auto LLC collects and uses the information you submit through our website.">
 <link rel="canonical" href="https://backyardboyzautollc.com/privacy.html">
 <meta name="theme-color" content="#F3F4F2">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Privacy Policy · Backyard Boyz Auto LLC">
+<meta property="og:description" content="How Backyard Boyz Auto LLC collects and uses the information you submit through our website.">
+<meta property="og:site_name" content="Backyard Boyz Auto LLC">
+<meta property="og:url" content="https://backyardboyzautollc.com/privacy.html">
+<meta property="og:image" content="{SITE}og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{OG_IMAGE_ALT}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy · Backyard Boyz Auto LLC">
+<meta name="twitter:description" content="How Backyard Boyz Auto LLC collects and uses the information you submit through our website.">
+<meta name="twitter:image" content="{SITE}og-image.jpg">
 <link rel="icon" type="image/webp" href="favicon.webp">
 <link rel="icon" type="image/png" sizes="48x48" href="favicon.png">
 <link rel="apple-touch-icon" href="logo.webp">
@@ -519,6 +545,47 @@ def build_privacy(parts):
 """
 
 
+# ---------- sitemap ----------
+# Each URL's <lastmod> is the date of the last commit that changed what visitors and search engines read on
+# that page: its <title>, meta description and <body>. Head-only edits (CSP, share tags, font preload,
+# favicons) do not count. A page with uncommitted content changes gets today's date (the day it is committed).
+SITEMAP_PAGES = [("", "index.html"), ("auto-window-tint.html", "auto-window-tint.html"),
+                 ("home-window-tint.html", "home-window-tint.html"), ("auto-glass.html", "auto-glass.html"),
+                 ("headliner-repair.html", "headliner-repair.html"), ("privacy.html", "privacy.html")]
+
+
+def page_content(markup):
+    if not markup:
+        return None
+    title = re.search(r"<title>(.*?)</title>", markup, re.S)
+    desc = re.search(r'<meta name="description" content="([^"]*)"', markup)
+    body = re.search(r"<body[^>]*>(.*)</body>", markup, re.S)
+    return tuple(m.group(1) if m else "" for m in (title, desc, body))
+
+
+def git_show(rev, path):
+    r = subprocess.run(["git", "show", f"{rev}:{path}"], capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 else None
+
+
+def content_date(path):
+    if page_content(open(path, encoding="utf-8").read()) != page_content(git_show("HEAD", path)):
+        return datetime.now(timezone.utc).date().isoformat()
+    log = subprocess.run(["git", "log", "--no-merges", "--format=%H %cs", "--", path], capture_output=True, text=True).stdout.split("\n")
+    for line in filter(None, log):
+        sha, day = line.split()
+        if page_content(git_show(sha, path)) != page_content(git_show(sha + "^", path)):
+            return day
+    return datetime.now(timezone.utc).date().isoformat()
+
+
+def write_sitemap():
+    urls = "".join(f"  <url>\n    <loc>{SITE}{loc}</loc>\n    <lastmod>{content_date(path)}</lastmod>\n  </url>\n"
+                   for loc, path in SITEMAP_PAGES)
+    open("sitemap.xml", "w", encoding="utf-8").write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + "</urlset>\n")
+
+
 if __name__ == "__main__":
     parts = shared_parts()
     for p in PAGES:
@@ -529,3 +596,5 @@ if __name__ == "__main__":
     privacy = build_privacy(parts)  # reads the policy text from privacy.html, so build it before overwriting
     open("privacy.html", "w", encoding="utf-8").write(privacy)
     print("wrote privacy.html")
+    write_sitemap()
+    print("wrote sitemap.xml")
