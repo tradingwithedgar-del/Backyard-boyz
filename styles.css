@@ -283,7 +283,7 @@ footer .wrap{display:grid;gap:var(--s-6);}
   .hero .wrap{grid-template-columns:1.05fr 1fr;gap:var(--s-8);}
   .picker{padding:var(--s-5);}
   .benefits{grid-template-columns:repeat(3,1fr);}
-  .svc-grid{grid-template-columns:repeat(4,1fr);}
+  .svc-grid{grid-template-columns:repeat(3,1fr);}
   .steps{grid-template-columns:repeat(3,1fr);}
   .quotes{grid-template-columns:repeat(2,1fr);gap:var(--s-7) var(--s-8);}
   .quote-wrap{grid-template-columns:1fr 1.1fr;gap:var(--s-8);}
@@ -366,13 +366,13 @@ footer .wrap{display:grid;gap:var(--s-6);}
 .fee-card p{color:var(--paper-2);max-width:34ch;}
 .fee-card .fee-hours{color:var(--paper);border-top:1px solid var(--line-d);padding-top:var(--s-3);}
 .svc-lists{display:grid;gap:var(--s-7);}
+.type-card ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:var(--s-2);}
+.type-card li{font-family:var(--f-display);font-weight:900;text-transform:uppercase;font-size:clamp(28px,6vw,40px);line-height:1;color:var(--paper);}
+.type-card li:not(:last-child)::after{content:"·";color:var(--gold);margin-left:var(--s-2);}
 .svc-lists h3{font-size:var(--t-h3);margin-bottom:var(--s-3);}
 .svc-lists ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-4);}
 .svc-lists li{display:grid;gap:2px;padding-top:var(--s-3);border-top:1px solid var(--line);color:var(--ink-2);}
 .svc-lists b{color:var(--ink);font-weight:600;}
-@media (min-width:600px){
-  .svc--wide{grid-column:1/-1;}
-}
 @media (min-width:900px){
   .svc-lists{grid-template-columns:1fr 1fr;gap:var(--s-8);}
 }

@@ -154,6 +154,46 @@ PAGES = [
         ],
     },
     {
+        "file": "sunroof-installation.html",
+        "key": "sunroof",
+        "nav": "Sunroofs",
+        "title": "Sunroof & Moonroof Installation in Houston | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Sunroof & Moonroof Installation in Houston | Backyard Boyz Auto LLC",
+        "desc": "Sunroof and moonroof installation in Cypress & Houston: pop-up, spoiler, sliding and panoramic. Tell us your vehicle and get your quote by text.",
+        "service_type": "Aftermarket sunroof and moonroof installation",
+        "eyebrow": "Sunroofs & moonroofs · Cypress & Houston",
+        "h1": "Sunroof &amp; moonroof installation in Houston",
+        "lede": "Want a sunroof or moonroof your car didn't come with? We install any type, from a simple pop-up to a full panoramic roof. Tell us your vehicle and the look you want and we'll text you a quote.",
+        "hero_img": None,
+        "hero_card": """<aside class="fee-card type-card" aria-label="Sunroof types we install">
+      <span class="mono">Any type, installed</span>
+      <ul>
+        <li>Pop-up</li>
+        <li>Spoiler</li>
+        <li>Sliding</li>
+        <li>Panoramic</li>
+        <li>Moonroof</li>
+      </ul>
+      <p>Tell us your vehicle and the type you want, and we'll text you a quote.</p>
+    </aside>""",
+        "points_title": "Sunroof or moonroof?",
+        "points": [
+            ("Sunroof.", "A panel in the roof that tilts or slides open to let in light and air."),
+            ("Moonroof.", "A tinted glass panel that lets light in even when it's closed, and usually tilts or slides open too."),
+            ("Panoramic.", "A large glass roof that stretches over the front and back seats, often with a section that opens."),
+        ],
+        "extra": "sunroof_types",
+        "photos": [],
+        "review": "chris",
+        "faq": [
+            ("How much does a sunroof cost?", "It depends on the vehicle and the type you want. A pop-up and a panoramic roof are very different jobs. Text us your year, make and model and the type you're after, and we'll text you a quote."),
+            ("Which type is right for my car?", "Tell us your vehicle and what you want from it, more light, more air or the full open-roof feel, and we'll tell you which types fit and what each costs."),
+            ("What's the difference between a sunroof and a moonroof?", "A sunroof is a panel that opens to let in light and air. A moonroof is a tinted glass panel that lets light in even when it's closed. People often use the names for the same thing, and we install both."),
+            ("Can the glass be tinted?", "Ask us about tinting the sunroof or moonroof glass when you request your quote."),
+            ("How long does it take?", "It depends on the vehicle and the type. We'll give you a time with your quote so you can plan around it."),
+        ],
+    },
+    {
         "file": "mobile-mechanic.html",
         "key": "mechanic",
         "nav": "Mobile mechanic",
@@ -213,6 +253,34 @@ EXTRAS = {
       </table>
     </div>
     <p class="note">A summary, not legal advice. We'll tell you what's legal for your vehicle before we start. <a class="link" href="/#shades">Try the shades on our G-wagon →</a></p>
+  </div>
+</section>
+""",
+    "sunroof_types": """
+<section class="band band--haze" aria-labelledby="typesTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">What we install</span>
+      <h2 id="typesTitle">Any type of sunroof or moonroof</h2>
+    </div>
+    <div class="svc-lists">
+      <div>
+        <h3>Sunroofs</h3>
+        <ul>
+          <li><b>Pop-up</b>Tilts up at the back to let air out. The simplest kind.</li>
+          <li><b>Spoiler</b>Tilts up, then slides back over the top of the roof.</li>
+          <li><b>Sliding</b>Slides back inside the roof, between the roof and the headliner.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Glass roofs</h3>
+        <ul>
+          <li><b>Moonroof</b>A tinted glass panel that lets light in even when it's closed.</li>
+          <li><b>Panoramic</b>A large glass roof over the front and back seats, often with a section that opens.</li>
+          <li><b>Not sure?</b>Tell us your vehicle and the look you want, and we'll tell you what fits.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 """,
@@ -620,7 +688,7 @@ def build_privacy(parts):
 SITEMAP_PAGES = [("", "index.html"), ("auto-window-tint.html", "auto-window-tint.html"),
                  ("home-window-tint.html", "home-window-tint.html"), ("auto-glass.html", "auto-glass.html"),
                  ("headliner-repair.html", "headliner-repair.html"),
-                 ("mobile-mechanic.html", "mobile-mechanic.html"), ("privacy.html", "privacy.html")]
+                 ("sunroof-installation.html", "sunroof-installation.html"), ("mobile-mechanic.html", "mobile-mechanic.html"), ("privacy.html", "privacy.html")]
 
 
 def page_content(markup):
