@@ -153,6 +153,83 @@ PAGES = [
             ("Can you come to me?", f"Ask when you request your quote. We're mobile across {AREA_LIST}, and our shop is in Cypress."),
         ],
     },
+    {
+        "file": "sunroof-replacement.html",
+        "key": "sunroof",
+        "nav": "Sunroofs",
+        "title": "Sunroof & Moonroof Replacement in Houston | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Sunroof & Moonroof Replacement in Houston | Backyard Boyz Auto LLC",
+        "desc": "Sunroof and moonroof replacement in Cypress & Houston: cracked or shattered glass, any type, including panoramic roofs. Get your quote by text.",
+        "service_type": "Sunroof and moonroof replacement",
+        "eyebrow": "Sunroofs & moonroofs · Cypress & Houston",
+        "h1": "Sunroof &amp; moonroof replacement in Houston",
+        "lede": "Cracked, shattered or damaged sunroof? We replace sunroofs and moonroofs of any type, from a small pop-up panel to a full panoramic glass roof. Tell us your vehicle and we'll text you a quote.",
+        "hero_img": None,
+        "hero_card": """<aside class="fee-card type-card" aria-label="Sunroof types we replace">
+      <span class="mono">Any type, replaced</span>
+      <ul>
+        <li>Pop-up</li>
+        <li>Spoiler</li>
+        <li>Sliding</li>
+        <li>Panoramic</li>
+        <li>Moonroof</li>
+      </ul>
+      <p>Tell us your vehicle and what happened, and we'll text you a quote.</p>
+    </aside>""",
+        "points_title": "Not sure what you have?",
+        "points": [
+            ("Sunroof.", "A panel in the roof that tilts or slides open to let in light and air."),
+            ("Moonroof.", "A tinted glass panel that lets light in even when it's closed, and usually tilts or slides open too."),
+            ("Panoramic.", "A large glass roof that stretches over the front and back seats, often with a section that opens."),
+        ],
+        "extra": "sunroof_types",
+        "photos": [],
+        "review": "chris",
+        "faq": [
+            ("How much does sunroof replacement cost?", "It depends on the vehicle and the type of sunroof. A small pop-up panel and a panoramic glass roof are very different jobs. Text us your year, make and model and a photo, and we'll text you a quote."),
+            ("My sunroof glass shattered. What do you need from me?", "Your year, make and model, and a photo of the roof from outside and inside. That's enough for us to quote the replacement."),
+            ("What's the difference between a sunroof and a moonroof?", "A sunroof is a panel that opens to let in light and air. A moonroof is a tinted glass panel that lets light in even when it's closed. People often use the names for the same thing, and we replace both."),
+            ("Can the new glass be tinted?", "Ask us about tinting the new glass when you request your quote."),
+            ("How long does it take?", "It depends on the vehicle and the type. We'll give you a time with your quote so you can plan around it."),
+        ],
+    },
+    {
+        "file": "mobile-mechanic.html",
+        "key": "mechanic",
+        "nav": "Mobile mechanic",
+        "title": "Mobile Mechanic & Roadside Help in Houston | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Mobile Mechanic & Roadside Assistance in Houston | Backyard Boyz Auto LLC",
+        "desc": "Mobile mechanic and 24/7 roadside help in Cypress & Houston: diagnostics, batteries, brakes, oil, jump starts, flat tires, lockouts, fuel. $75 call-out.",
+        "service_type": "Mobile mechanic and roadside assistance",
+        "offers": {"@type": "Offer", "price": "75", "priceCurrency": "USD",
+                   "description": "Travel and diagnostic fee, credited toward the repair if you book it. Roadside calls are the same $75 call-out."},
+        "eyebrow": "Mobile mechanic · Open 24/7",
+        "h1": "Mobile mechanic &amp; roadside help in Houston",
+        "lede": "Car won't start, a warning light came on, or you're stuck on the side of the road? We come to you anywhere across the Houston area, day or night, for a flat $75 to come out and find the problem.",
+        "hero_img": None,
+        "hero_card": """<aside class="fee-card" aria-label="Mobile mechanic pricing">
+      <span class="mono">Travel + diagnostic fee</span>
+      <p class="fee">$75</p>
+      <p>Credited toward the repair if you book it. Roadside calls are the same $75 call-out.</p>
+      <p class="mono fee-hours">Open 24 hours · 7 days</p>
+    </aside>""",
+        "points_title": "How the $75 works",
+        "points": [
+            ("One flat fee to come out.", "$75 covers the drive to you and finding the problem, wherever the car is parked."),
+            ("Credited when you book.", "If you go ahead with the repair, the $75 comes off the bill. The repair itself is quoted separately."),
+            ("Same fee for roadside.", "Jump start, flat tire, lockout or out of gas: a roadside call is a $75 call-out."),
+        ],
+        "extra": "mechanic_services",
+        "photos": [],
+        "review": "arturo",
+        "faq": [
+            ("How much does a mobile mechanic visit cost?", "There's a $75 travel and diagnostic fee to come out and find the problem. If you book the repair, the $75 comes off the bill. The repair itself is quoted separately."),
+            ("What does roadside assistance cost?", "A roadside call is a $75 call-out. That covers jump starts, flat tire changes, lockouts and fuel delivery."),
+            ("Are you open at night and on weekends?", "Yes. We're open 24 hours a day, 7 days a week."),
+            ("Where do you come out to?", f"We're mobile across {AREA_LIST}, and our shop is in Cypress."),
+            ("What should I tell you when I call?", "Your year, make and model, what the car is doing (or not doing), and where it's parked. A photo of any warning light on the dash helps."),
+        ],
+    },
 ]
 
 EXTRAS = {
@@ -176,6 +253,64 @@ EXTRAS = {
       </table>
     </div>
     <p class="note">A summary, not legal advice. We'll tell you what's legal for your vehicle before we start. <a class="link" href="/#shades">Try the shades on our G-wagon →</a></p>
+  </div>
+</section>
+""",
+    "sunroof_types": """
+<section class="band band--haze" aria-labelledby="typesTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">What we replace</span>
+      <h2 id="typesTitle">Any type of sunroof or moonroof</h2>
+    </div>
+    <div class="svc-lists">
+      <div>
+        <h3>Sunroofs</h3>
+        <ul>
+          <li><b>Pop-up</b>A panel that tilts up at the back to let air out.</li>
+          <li><b>Spoiler</b>Tilts up, then slides back over the top of the roof.</li>
+          <li><b>Sliding</b>Slides back inside the roof, between the roof and the headliner.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Glass roofs</h3>
+        <ul>
+          <li><b>Moonroof</b>A tinted glass panel that lets light in even when it's closed.</li>
+          <li><b>Panoramic</b>A large glass roof over the front and back seats, often with a section that opens.</li>
+          <li><b>Not sure?</b>Send a photo with your year, make and model, and we'll tell you what you have.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+""",
+    "mechanic_services": """
+<section class="band band--haze" aria-labelledby="mechTitle">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">What we handle</span>
+      <h2 id="mechTitle">Repairs and roadside help where you're parked</h2>
+    </div>
+    <div class="svc-lists">
+      <div>
+        <h3>Mobile repairs</h3>
+        <ul>
+          <li><b>Diagnostics</b>Check-engine and warning lights. We scan the car and find what's wrong.</li>
+          <li><b>Batteries, starters &amp; alternators</b>The car won't start, or the battery keeps dying.</li>
+          <li><b>Brakes</b>Squeaking or grinding brakes, checked and fixed where the car is parked.</li>
+          <li><b>Oil &amp; fluids</b>Oil changes and fluids, done in your driveway or parking lot.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Roadside assistance</h3>
+        <ul>
+          <li><b>Jump starts</b>Dead battery? We get you going.</li>
+          <li><b>Flat tire changes</b>We swap the flat for your spare.</li>
+          <li><b>Lockouts</b>Keys locked inside? We get you back in.</li>
+          <li><b>Fuel delivery</b>Ran out of gas? We bring fuel to you.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 """,
@@ -269,7 +404,8 @@ def build(page, parts):
             {"@type": "Service", "@id": url + "#service", "name": html.unescape(page["h1"]),
              "serviceType": page["service_type"], "url": url,
              "provider": {"@id": SITE + "#business"},
-             "areaServed": [{"@type": "City", "name": f"{c}, TX"} for c in CITIES]},
+             "areaServed": [{"@type": "City", "name": f"{c}, TX"} for c in CITIES],
+             **({"offers": page["offers"]} if page.get("offers") else {})},
             {"@type": "BreadcrumbList", "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE},
                 {"@type": "ListItem", "position": 2, "name": page["nav"], "item": url}]},
@@ -350,7 +486,7 @@ def build(page, parts):
         <a class="btn btn--line" href="{PHONE_TEL}">{CALL_ICON}Call or text {PHONE}</a>
       </div>
     </div>
-    {shot(page["hero_img"], "shot page-shot", SIZES_HERO)}
+    {shot(page["hero_img"], "shot page-shot", SIZES_HERO) if page["hero_img"] else page["hero_card"]}
   </div>
 </section>
 
@@ -551,7 +687,8 @@ def build_privacy(parts):
 # favicons) do not count. A page with uncommitted content changes gets today's date (the day it is committed).
 SITEMAP_PAGES = [("", "index.html"), ("auto-window-tint.html", "auto-window-tint.html"),
                  ("home-window-tint.html", "home-window-tint.html"), ("auto-glass.html", "auto-glass.html"),
-                 ("headliner-repair.html", "headliner-repair.html"), ("privacy.html", "privacy.html")]
+                 ("headliner-repair.html", "headliner-repair.html"),
+                 ("sunroof-replacement.html", "sunroof-replacement.html"), ("mobile-mechanic.html", "mobile-mechanic.html"), ("privacy.html", "privacy.html")]
 
 
 def page_content(markup):
