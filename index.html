@@ -59,7 +59,9 @@
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Car window tinting","serviceType":"Automotive window tint"}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Home and commercial window tinting","serviceType":"Residential and commercial window film"}},
           {"@type":"Offer","itemOffered":{"@type":"Service","name":"Auto glass replacement","serviceType":"Windshield and side glass replacement"}},
-          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Headliner replacement","serviceType":"Car headliner repair"}}
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Headliner replacement","serviceType":"Car headliner repair"}},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Mobile mechanic","serviceType":"Mobile diagnostics, batteries, starters, alternators, brakes, oil and fluids"},"price":"75","priceCurrency":"USD","description":"Travel and diagnostic fee, credited toward the repair if you book it"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Roadside assistance","serviceType":"Jump starts, flat tire changes, lockouts and fuel delivery"},"price":"75","priceCurrency":"USD","description":"Roadside call-out"}
         ]
       }
     },
@@ -95,6 +97,7 @@
               <li><a href="/home-window-tint.html">Home &amp; commercial tint</a></li>
               <li><a href="/auto-glass.html">Auto glass</a></li>
               <li><a href="/headliner-repair.html">Headliners</a></li>
+              <li><a href="/mobile-mechanic.html">Mobile mechanic</a></li>
             </ul>
           </details>
         </li>
@@ -116,7 +119,7 @@
 <section class="band band--clear hero" id="shades" aria-labelledby="heroTitle">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="mono eyebrow">Window tint · Auto glass · Headliners</span>
+      <span class="mono eyebrow">Window tint · Auto glass · Headliners · Mobile mechanic</span>
       <h1 id="heroTitle">Window tint that takes the <em>Houston heat</em> off.</h1>
       <p class="lede">Auto and home window tint from brothers Hector and Adrian. Bring it to our Cypress shop or we'll come to your driveway, and we'll text you a quote.</p>
       <div class="cta-row">
@@ -243,6 +246,12 @@
         <h3>Headliners &amp; interior</h3>
         <p>Sagging headliner falling on your head? We fix that too. Ask what else your ride needs.</p>
         <span class="links"><a class="link" href="headliner-repair.html">Headliner repair</a><a class="link" href="#quote" data-pick="Headliner / other">Quote this →</a></span>
+      </article>
+      <article class="svc svc--wide">
+        <span class="mono">Mobile · 24/7</span>
+        <h3>Mobile mechanic &amp; roadside</h3>
+        <p>Diagnostics, batteries, brakes and oil where you're parked, plus jump starts, flat tires, lockouts and fuel. $75 to come out, credited toward the repair if you book it.</p>
+        <span class="links"><a class="link" href="mobile-mechanic.html">Mobile mechanic &amp; roadside</a><a class="link" href="#quote" data-pick="Mobile mechanic / roadside">Quote this →</a></span>
       </article>
     </div>
   </div>
@@ -397,6 +406,7 @@
           <button type="button" class="opt" data-svc="Home / commercial tint"><span><span class="o-name">Home or commercial tint</span><span class="o-sub">House or business windows</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <button type="button" class="opt" data-svc="Auto glass / replacement"><span><span class="o-name">Auto glass</span><span class="o-sub">Windshield or side glass</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           <button type="button" class="opt" data-svc="Headliner / other"><span><span class="o-name">Headliner or other</span><span class="o-sub">Interior and more</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <button type="button" class="opt" data-svc="Mobile mechanic / roadside"><span><span class="o-name">Mobile mechanic or roadside</span><span class="o-sub">Repair, jump start, flat tire, lockout, fuel</span></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </div>
 
@@ -522,6 +532,7 @@
           <li><a href="home-window-tint.html">Home &amp; commercial tint</a></li>
           <li><a href="auto-glass.html">Auto glass</a></li>
           <li><a href="headliner-repair.html">Headliners</a></li>
+          <li><a href="mobile-mechanic.html">Mobile mechanic</a></li>
         </ul>
       </div>
     </div>
@@ -687,7 +698,7 @@ document.querySelectorAll('[data-svc]').forEach(o => o.addEventListener('click',
 }));
 document.querySelectorAll('[data-pick]').forEach(a => a.addEventListener('click', () => pickService(a.dataset.pick)));
 document.getElementById('qBack').addEventListener('click', () => qStep(1));
-const fromPage = {tint:'Auto window tint', home:'Home / commercial tint', glass:'Auto glass / replacement', headliner:'Headliner / other'}[new URLSearchParams(location.search).get('service')];
+const fromPage = {tint:'Auto window tint', home:'Home / commercial tint', glass:'Auto glass / replacement', headliner:'Headliner / other', mechanic:'Mobile mechanic / roadside'}[new URLSearchParams(location.search).get('service')];
 if(fromPage) pickService(fromPage);
 
 const qForm = document.getElementById('qForm');

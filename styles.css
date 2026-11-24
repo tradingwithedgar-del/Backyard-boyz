@@ -358,3 +358,21 @@ footer .wrap{display:grid;gap:var(--s-6);}
 .f-cols ul:has(a){gap:0;} /* link lists: the 44px rows already space the links */
 .link,.policy-body a,.faq .a a,.form-error a{padding-block:4px;}
 .crumbs a,.form-note a{padding-block:6px;}
+
+/* ---------- mobile mechanic ---------- */
+.fee-card{display:grid;gap:var(--s-3);align-content:start;background:var(--limo);color:var(--paper);border-radius:var(--r);padding:var(--s-6);}
+.fee-card .mono{color:var(--gold);}
+.fee-card .fee{font-family:var(--f-display);font-weight:900;font-size:clamp(72px,16vw,112px);line-height:.85;color:var(--paper);}
+.fee-card p{color:var(--paper-2);max-width:34ch;}
+.fee-card .fee-hours{color:var(--paper);border-top:1px solid var(--line-d);padding-top:var(--s-3);}
+.svc-lists{display:grid;gap:var(--s-7);}
+.svc-lists h3{font-size:var(--t-h3);margin-bottom:var(--s-3);}
+.svc-lists ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-4);}
+.svc-lists li{display:grid;gap:2px;padding-top:var(--s-3);border-top:1px solid var(--line);color:var(--ink-2);}
+.svc-lists b{color:var(--ink);font-weight:600;}
+@media (min-width:600px){
+  .svc--wide{grid-column:1/-1;}
+}
+@media (min-width:900px){
+  .svc-lists{grid-template-columns:1fr 1fr;gap:var(--s-8);}
+}
