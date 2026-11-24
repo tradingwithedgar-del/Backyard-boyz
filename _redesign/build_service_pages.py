@@ -154,19 +154,19 @@ PAGES = [
         ],
     },
     {
-        "file": "sunroof-installation.html",
+        "file": "sunroof-replacement.html",
         "key": "sunroof",
         "nav": "Sunroofs",
-        "title": "Sunroof & Moonroof Installation in Houston | Backyard Boyz",  # <title> only, kept short for search results
-        "share_title": "Sunroof & Moonroof Installation in Houston | Backyard Boyz Auto LLC",
-        "desc": "Sunroof and moonroof installation in Cypress & Houston: pop-up, spoiler, sliding and panoramic. Tell us your vehicle and get your quote by text.",
-        "service_type": "Aftermarket sunroof and moonroof installation",
+        "title": "Sunroof & Moonroof Replacement in Houston | Backyard Boyz",  # <title> only, kept short for search results
+        "share_title": "Sunroof & Moonroof Replacement in Houston | Backyard Boyz Auto LLC",
+        "desc": "Sunroof and moonroof replacement in Cypress & Houston: cracked or shattered glass, any type, including panoramic roofs. Get your quote by text.",
+        "service_type": "Sunroof and moonroof replacement",
         "eyebrow": "Sunroofs & moonroofs · Cypress & Houston",
-        "h1": "Sunroof &amp; moonroof installation in Houston",
-        "lede": "Want a sunroof or moonroof your car didn't come with? We install any type, from a simple pop-up to a full panoramic roof. Tell us your vehicle and the look you want and we'll text you a quote.",
+        "h1": "Sunroof &amp; moonroof replacement in Houston",
+        "lede": "Cracked, shattered or damaged sunroof? We replace sunroofs and moonroofs of any type, from a small pop-up panel to a full panoramic glass roof. Tell us your vehicle and we'll text you a quote.",
         "hero_img": None,
-        "hero_card": """<aside class="fee-card type-card" aria-label="Sunroof types we install">
-      <span class="mono">Any type, installed</span>
+        "hero_card": """<aside class="fee-card type-card" aria-label="Sunroof types we replace">
+      <span class="mono">Any type, replaced</span>
       <ul>
         <li>Pop-up</li>
         <li>Spoiler</li>
@@ -174,9 +174,9 @@ PAGES = [
         <li>Panoramic</li>
         <li>Moonroof</li>
       </ul>
-      <p>Tell us your vehicle and the type you want, and we'll text you a quote.</p>
+      <p>Tell us your vehicle and what happened, and we'll text you a quote.</p>
     </aside>""",
-        "points_title": "Sunroof or moonroof?",
+        "points_title": "Not sure what you have?",
         "points": [
             ("Sunroof.", "A panel in the roof that tilts or slides open to let in light and air."),
             ("Moonroof.", "A tinted glass panel that lets light in even when it's closed, and usually tilts or slides open too."),
@@ -186,10 +186,10 @@ PAGES = [
         "photos": [],
         "review": "chris",
         "faq": [
-            ("How much does a sunroof cost?", "It depends on the vehicle and the type you want. A pop-up and a panoramic roof are very different jobs. Text us your year, make and model and the type you're after, and we'll text you a quote."),
-            ("Which type is right for my car?", "Tell us your vehicle and what you want from it, more light, more air or the full open-roof feel, and we'll tell you which types fit and what each costs."),
-            ("What's the difference between a sunroof and a moonroof?", "A sunroof is a panel that opens to let in light and air. A moonroof is a tinted glass panel that lets light in even when it's closed. People often use the names for the same thing, and we install both."),
-            ("Can the glass be tinted?", "Ask us about tinting the sunroof or moonroof glass when you request your quote."),
+            ("How much does sunroof replacement cost?", "It depends on the vehicle and the type of sunroof. A small pop-up panel and a panoramic glass roof are very different jobs. Text us your year, make and model and a photo, and we'll text you a quote."),
+            ("My sunroof glass shattered. What do you need from me?", "Your year, make and model, and a photo of the roof from outside and inside. That's enough for us to quote the replacement."),
+            ("What's the difference between a sunroof and a moonroof?", "A sunroof is a panel that opens to let in light and air. A moonroof is a tinted glass panel that lets light in even when it's closed. People often use the names for the same thing, and we replace both."),
+            ("Can the new glass be tinted?", "Ask us about tinting the new glass when you request your quote."),
             ("How long does it take?", "It depends on the vehicle and the type. We'll give you a time with your quote so you can plan around it."),
         ],
     },
@@ -260,14 +260,14 @@ EXTRAS = {
 <section class="band band--haze" aria-labelledby="typesTitle">
   <div class="wrap">
     <div class="sec-head">
-      <span class="mono eyebrow">What we install</span>
+      <span class="mono eyebrow">What we replace</span>
       <h2 id="typesTitle">Any type of sunroof or moonroof</h2>
     </div>
     <div class="svc-lists">
       <div>
         <h3>Sunroofs</h3>
         <ul>
-          <li><b>Pop-up</b>Tilts up at the back to let air out. The simplest kind.</li>
+          <li><b>Pop-up</b>A panel that tilts up at the back to let air out.</li>
           <li><b>Spoiler</b>Tilts up, then slides back over the top of the roof.</li>
           <li><b>Sliding</b>Slides back inside the roof, between the roof and the headliner.</li>
         </ul>
@@ -277,7 +277,7 @@ EXTRAS = {
         <ul>
           <li><b>Moonroof</b>A tinted glass panel that lets light in even when it's closed.</li>
           <li><b>Panoramic</b>A large glass roof over the front and back seats, often with a section that opens.</li>
-          <li><b>Not sure?</b>Tell us your vehicle and the look you want, and we'll tell you what fits.</li>
+          <li><b>Not sure?</b>Send a photo with your year, make and model, and we'll tell you what you have.</li>
         </ul>
       </div>
     </div>
@@ -688,7 +688,7 @@ def build_privacy(parts):
 SITEMAP_PAGES = [("", "index.html"), ("auto-window-tint.html", "auto-window-tint.html"),
                  ("home-window-tint.html", "home-window-tint.html"), ("auto-glass.html", "auto-glass.html"),
                  ("headliner-repair.html", "headliner-repair.html"),
-                 ("sunroof-installation.html", "sunroof-installation.html"), ("mobile-mechanic.html", "mobile-mechanic.html"), ("privacy.html", "privacy.html")]
+                 ("sunroof-replacement.html", "sunroof-replacement.html"), ("mobile-mechanic.html", "mobile-mechanic.html"), ("privacy.html", "privacy.html")]
 
 
 def page_content(markup):
